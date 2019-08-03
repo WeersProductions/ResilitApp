@@ -21,8 +21,12 @@
 			xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
 			x:Class="ResilITApp.MainPage">
 
-	<Label Text="Welcome to ResilIT!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+    <StackLayout>
+        <Label Text="Welcome to ResilIT!" 
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+        <schedule:SfSchedule ScheduleView ="TimelineView">
+        </schedule:SfSchedule>
+    </StackLayout>
 
 </ContentPage>
