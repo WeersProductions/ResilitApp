@@ -22,7 +22,7 @@
 			x:Class="ResilITApp.MainPage">
 
 	<Label Text="Welcome to ResilIT!" 
-           VerticalOptions="Top" 
+           VerticalOptions="Center" 
            HorizontalOptions="Center" />
 
 </ContentPage>
