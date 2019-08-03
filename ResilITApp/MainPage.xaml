@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ResilITApp"
+             xmlns:svg="clr-namespace:ResilITApp"
+             xmlns:local="clr-namespace:ResilITApp;assembly=ResilITApp"
              xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
 			xmlns:pdfviewer="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms"
 			xmlns:schedule="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
@@ -22,9 +23,16 @@
 			x:Class="ResilITApp.MainPage">
 
     <StackLayout>
+        <!--Menu bar-->
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" 
+               HorizontalOptions="Center">
+        <Image Source="{local:ImageResource ResilITApp.resources.logo.png}" HeightRequest="50" WidthRequest="50" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center"/>
         <Label Text="Welcome to ResilIT!" 
                VerticalOptions="Center" 
                HorizontalOptions="Center" />
+        </StackLayout>
+
+        <!--Content-->
         <schedule:SfSchedule ScheduleView ="TimelineView">
         </schedule:SfSchedule>
     </StackLayout>

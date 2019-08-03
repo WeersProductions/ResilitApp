@@ -23,6 +23,9 @@
 <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.39" />
 <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.2.0.39" />
 <PackageReference Include="Syncfusion.Xamarin.Expander " Version="17.2.0.34" />
+<PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
+<PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+<PackageReference Include="SkiaSharp.Extended" Version="1.60.0" />
 </ItemGroup>
 
   <ItemGroup>
@@ -36,5 +39,12 @@
 
   <ItemGroup>
     <PackageReference Update="Syncfusion.Xamarin.Expander" Version="17.2.0.39" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="resources\Logo.svg" />
+    <None Remove="resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\logo.png" />
   </ItemGroup>
 </Project>
