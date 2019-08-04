@@ -26,6 +26,7 @@
 <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
 <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
 <PackageReference Include="SkiaSharp.Extended" Version="1.60.0" />
+<PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
 </ItemGroup>
 
   <ItemGroup>
@@ -43,8 +44,10 @@
   <ItemGroup>
     <None Remove="resources\Logo.svg" />
     <None Remove="resources\logo.png" />
+    <None Remove="config.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\logo.png" />
+    <EmbeddedResource Include="config.json" />
   </ItemGroup>
 </Project>
