@@ -22,18 +22,27 @@
 			xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
 			x:Class="ResilITApp.MainPage">
 
-    <StackLayout>
+    <StackLayout VerticalOptions="FillAndExpand">
         <!--Menu bar-->
         <StackLayout Orientation="Horizontal" VerticalOptions="Center" 
                HorizontalOptions="Center">
         <Image Source="{local:ImageResource ResilITApp.resources.logo.png}" HeightRequest="50" WidthRequest="50" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center"/>
-        <Label Text="Welcome to ResilIT!" 
+        <Label Text="ResilIT" 
                VerticalOptions="Center" 
                HorizontalOptions="Center" />
         </StackLayout>
 
         <!--Content-->
-        <schedule:SfSchedule ScheduleView ="TimelineView">
+        <schedule:SfSchedule VerticalOptions="FillAndExpand" ScheduleView ="TimelineView" TimeInterval="15" TimeIntervalHeight="180" MoveToDate="2019-11-26" MinDisplayDate="2019-11-26" MaxDisplayDate="2019-11-26">
+            <schedule:SfSchedule.TimelineViewSettings>
+                <schedule:TimelineViewSettings
+                    StartHour="08"
+                    EndHour="22">
+                    <schedule:TimelineViewSettings.LabelSettings>
+                        <schedule:TimelineLabelSettings TimeFormat="HH:mm"/>
+                    </schedule:TimelineViewSettings.LabelSettings>
+                </schedule:TimelineViewSettings>
+            </schedule:SfSchedule.TimelineViewSettings>
         </schedule:SfSchedule>
     </StackLayout>
 
