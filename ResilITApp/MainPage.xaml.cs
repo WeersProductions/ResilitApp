@@ -11,7 +11,10 @@ namespace ResilITApp
     {
         public MainPage()
         {
+
             InitializeComponent();
         }
+
+        
     }
 }

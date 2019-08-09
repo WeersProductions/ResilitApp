@@ -5,23 +5,23 @@
   </PropertyGroup>
 
 <ItemGroup>
-<PackageReference Include="Xamarin.Forms" Version="4.1.0.618606" />
-<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfRadialMenu" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.39" />
-<PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.2.0.39" />
+<PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
+<PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfRadialMenu" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.40" />
+<PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.2.0.40" />
 <PackageReference Include="Syncfusion.Xamarin.Expander " Version="17.2.0.34" />
 <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
 <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
@@ -45,9 +45,11 @@
     <None Remove="resources\Logo.svg" />
     <None Remove="resources\logo.png" />
     <None Remove="config.json" />
+    <None Remove="timetable.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\logo.png" />
     <EmbeddedResource Include="config.json" />
+    <EmbeddedResource Include="timetable.json" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,62 @@
+﻿[
+    [
+        {
+            "startTime": "12:00:00.001Z",
+            "endTime": "14:00:00.001Z",
+            "capacity": 5,
+            "enabled": true,
+            "location": "Room 1",
+            "title": "Talk 1",
+            "subTitle": "First talk"
+        },
+        {
+            "startTime": "15:00:00.001Z",
+            "endTime": "16:00:00.001Z",
+            "capacity": 20,
+            "enabled": true,
+            "location": "Room 1",
+            "title": "Talk 2",
+            "subTitle": "Second talk"
+        }
+    ],
+    [
+        {
+            "startTime": "11:00:00.001Z",
+            "endTime": "14:00:00.001Z",
+            "capacity": 35,
+            "enabled": true,
+            "location": "Room 2",
+            "title": "Talk 1.1",
+            "subTitle": "First talk of second track"
+        },
+        {
+            "startTime": "14:00:00.001Z",
+            "endTime": "16:00:00.001Z",
+            "capacity": 25,
+            "enabled": true,
+            "location": "Room 2",
+            "title": "Talk 2.1",
+            "subTitle": "Second talk of second track"
+        }
+    ],
+    [
+        {
+            "startTime": "9:00:00.001Z",
+            "endTime": "12:00:00.001Z",
+            "capacity": 9,
+            "enabled": true,
+            "location": "Room 3",
+            "title": "Talk 1.2",
+            "subTitle": "First talk of third track"
+        },
+        {
+            "startTime": "12:00:00.001Z",
+            "endTime": "13:00:00.001Z",
+            "capacity": 45,
+            "enabled": true,
+            "location": "Room 3",
+            "title": "Talk 2.2",
+            "subTitle": "Second talk of third track"
+        }
+    ]
+]

@@ -33,7 +33,17 @@
         </StackLayout>
 
         <!--Content-->
-        <schedule:SfSchedule VerticalOptions="FillAndExpand" ScheduleView ="TimelineView" TimeInterval="15" TimeIntervalHeight="180" MoveToDate="2019-11-26" MinDisplayDate="2019-11-26" MaxDisplayDate="2019-11-26">
+        <schedule:SfSchedule VerticalOptions="FillAndExpand" ScheduleView ="TimelineView" TimeInterval="15" TimeIntervalHeight="180" MoveToDate="2019-11-26" MinDisplayDate="2019-11-26" MaxDisplayDate="2019-11-26" DataSource="{Binding Talks}">
+            <schedule:SfSchedule.AppointmentMapping>
+                <schedule:ScheduleAppointmentMapping
+                    ColorMapping="Color"
+                    EndTimeMapping="To"
+                    StartTimeMapping="From"
+                    SubjectMapping="EventName"/>
+            </schedule:SfSchedule.AppointmentMapping>
+            <schedule:SfSchedule.BindingContext>
+                <local:ScheduleViewModel/>
+            </schedule:SfSchedule.BindingContext>
             <schedule:SfSchedule.TimelineViewSettings>
                 <schedule:TimelineViewSettings
                     StartHour="08"
