@@ -128,7 +128,9 @@ namespace ResilITApp.UWP
 
 				assembliesToInclude.Add(typeof(SfDataGridRenderer).GetTypeInfo().Assembly);
 
-                Xamarin.Forms.Forms.Init(e, assembliesToInclude);
+				assembliesToInclude.AddRange(Rg.Plugins.Popup.Popup.GetExtraAssemblies());
+
+				Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

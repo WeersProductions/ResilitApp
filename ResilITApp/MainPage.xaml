@@ -20,7 +20,12 @@
 			xmlns:checkbox="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
 			xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
 			xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
-			x:Class="ResilITApp.MainPage">
+             xmlns:local1="clr-namespace:ResilITApp.Behaviors"
+             x:Class="ResilITApp.MainPage">
+
+    <ContentPage.Behaviors>
+        <local1:ScheduleViewBehavior/>
+    </ContentPage.Behaviors>
 
     <StackLayout VerticalOptions="FillAndExpand">
         <!--Menu bar-->
@@ -33,17 +38,29 @@
         </StackLayout>
 
         <!--Content-->
-        <schedule:SfSchedule VerticalOptions="FillAndExpand" ScheduleView ="TimelineView" TimeInterval="15" TimeIntervalHeight="180" MoveToDate="2019-11-26" MinDisplayDate="2019-11-26" MaxDisplayDate="2019-11-26" DataSource="{Binding Talks}">
+        <schedule:SfSchedule VerticalOptions="FillAndExpand"
+                             ScheduleView ="TimelineView"
+                             TimeInterval="15"
+                             TimeIntervalHeight="180"
+                             MoveToDate="2019-11-26"
+                             MinDisplayDate="2019-11-26"
+                             MaxDisplayDate="2019-11-26"
+                             CellTappedCommand="{Binding ScheduleCellTapped}"
+	                         CellDoubleTappedCommand="{Binding ScheduleCellDoubleTapped}"
+	                         CellLongPressedCommand="{Binding ScheduleCellLongPressed}"
+	                         VisibleDatesChangedCommand="{Binding ScheduleVisibleDatesChanged}"
+                             DataSource="{Binding Talks}">
+            <schedule:SfSchedule.BindingContext>
+                <local:ScheduleViewModel/>
+            </schedule:SfSchedule.BindingContext>
             <schedule:SfSchedule.AppointmentMapping>
                 <schedule:ScheduleAppointmentMapping
                     ColorMapping="Color"
                     EndTimeMapping="To"
                     StartTimeMapping="From"
-                    SubjectMapping="EventName"/>
+                    SubjectMapping="EventName"
+                    NotesMapping="SubTitle"/>
             </schedule:SfSchedule.AppointmentMapping>
-            <schedule:SfSchedule.BindingContext>
-                <local:ScheduleViewModel/>
-            </schedule:SfSchedule.BindingContext>
             <schedule:SfSchedule.TimelineViewSettings>
                 <schedule:TimelineViewSettings
                     StartHour="08"
