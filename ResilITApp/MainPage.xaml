@@ -20,12 +20,7 @@
 			xmlns:checkbox="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
 			xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
 			xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
-             xmlns:local1="clr-namespace:ResilITApp.Behaviors"
              x:Class="ResilITApp.MainPage">
-
-    <ContentPage.Behaviors>
-        <local1:ScheduleViewBehavior/>
-    </ContentPage.Behaviors>
 
     <StackLayout VerticalOptions="FillAndExpand">
         <!--Menu bar-->
