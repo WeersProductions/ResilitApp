@@ -14,7 +14,7 @@ using System.ComponentModel;
 
 namespace ResilITApp
 {
-    public class ScheduleViewModel : INotifyPropertyChanged
+    public class ScheduleViewModel : ContentPage
     {
         private const string TalksFile = "timetable.json";
 
@@ -28,7 +28,6 @@ namespace ResilITApp
             set
             {
                 talks = value;
-                RaiseOnPropertyChanged("Talks");
             }
         }
         private Color[] ScheduleColors = { Color.Blue, Color.LightBlue, Color.Coral };
@@ -49,43 +48,31 @@ namespace ResilITApp
 
         private void CellTapped(CellTappedEventArgs args)
         {
-            Console.WriteLine("Cell tapped!");
-            var selectedDateTime = args.Datetime;
-            Console.WriteLine("cell tap");
-            //ShowPopup();
-            Console.WriteLine("cell tap2");
-            Talks = null;
+            if(args.Appointment != null)
+            {
+                ShowPopup();
+            }
         }
 
         private void DoubleTapped(CellTappedEventArgs args)
         {
             var selectedDateTime = args.Datetime;
-            Console.WriteLine("double press");
-            Talks = GetTalks();
         }
 
         private void LongPressed(CellTappedEventArgs args)
         {
             var selectedDateTime = args.Datetime;
-            Console.WriteLine("long press");
         }
 
         private void VisibleDatesChanged(VisibleDatesChangedEventArgs args)
         {
             var visibleDates = args.visibleDates;
-            Console.WriteLine("hi");
         }
 
-        //private void CellTapped(CellTappedEventArgs args)
-        //{
-        //    var selectedDateTime = args.Datetime;
-        //    ShowPopup();
-        //}
-
-        //private async void ShowPopup()
-        //{
-        //    await Navigation.PushPopupAsync(new SchedulePopup());
-        //}
+        private async void ShowPopup()
+        {
+            await Navigation.PushPopupAsync(new SchedulePopup());
+        }
 
         /// <summary>
         /// Get the raw json talk objects.
@@ -136,13 +123,6 @@ namespace ResilITApp
                 });
             }
             return result;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaiseOnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
