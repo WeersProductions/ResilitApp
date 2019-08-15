@@ -50,7 +50,7 @@ namespace ResilITApp
         {
             if(args.Appointment != null)
             {
-                ShowPopup();
+                ShowPopup(args.Appointment);
             }
         }
 
@@ -69,9 +69,9 @@ namespace ResilITApp
             var visibleDates = args.visibleDates;
         }
 
-        private async void ShowPopup()
+        private async void ShowPopup(object appointment)
         {
-            await Navigation.PushPopupAsync(new SchedulePopup());
+            await Navigation.PushPopupAsync(new SchedulePopup(appointment));
         }
 
         /// <summary>

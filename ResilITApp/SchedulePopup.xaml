@@ -26,7 +26,11 @@
         HorizontalOptions="Center" 
         Padding="20, 20, 20, 20"
         BackgroundColor="white">
-        <Label
-            Text="Talk"/>
+        <Label x:Name="EventName"
+            Text="Title"/>
+        <Label x:Name="EventDescription"
+               Text="Description"/>
+        <Label x:Name="EventTime"
+               Text="Time"/>
     </StackLayout>
 </pages:PopupPage>
