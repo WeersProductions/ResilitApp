@@ -25,9 +25,16 @@
         VerticalOptions="Center" 
         HorizontalOptions="Center" 
         Padding="20, 20, 20, 20"
-        BackgroundColor="white">
-        <Label x:Name="EventName"
-            Text="Title"/>
+        BackgroundColor="white"
+        Orientation="Vertical">
+        <StackLayout
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand">
+            <Label x:Name="EventName"
+                Text="Title" VerticalTextAlignment="Center"/>
+            <Image BackgroundColor="black" WidthRequest="10" HeightRequest="10" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+        <BoxView Color="red" WidthRequest="20" HeightRequest="1"/>
         <Label x:Name="EventDescription"
                Text="Description"/>
         <Label x:Name="EventTime"
