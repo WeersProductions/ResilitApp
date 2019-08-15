@@ -85,12 +85,12 @@ namespace ResilITApp
             using (var reader = new StreamReader(stream))
             {
                 var json = reader.ReadToEnd();
-                List<List<JSONTalk>> jsonResult = JsonConvert.DeserializeObject<List<List<JSONTalk>>>(json);
+                JSONTimetable jsonResult = JsonConvert.DeserializeObject<JSONTimetable>(json);
                 List<JSONTalk> result = new List<JSONTalk>();
                 int index = 0;
-                foreach (List<JSONTalk> jsonTalks in jsonResult)
+                foreach (JSONTrack jsonTrack in jsonResult.tracks)
                 {
-                    foreach(JSONTalk jsonTalk in jsonTalks)
+                    foreach(JSONTalk jsonTalk in jsonTrack.talks)
                     {
                         jsonTalk.color = ScheduleColors[index];
                         result.Add(jsonTalk);
@@ -111,8 +111,8 @@ namespace ResilITApp
                 {
                     continue;
                 }
-                DateTime from = Convert.ToDateTime(data.startTime);
-                DateTime to = Convert.ToDateTime(data.endTime);
+                DateTime from = Convert.ToDateTime(data.startTime).ToUniversalTime();
+                DateTime to = Convert.ToDateTime(data.endTime).ToUniversalTime();
                 result.Add(new Talk()
                 {
                     EventName = data.title,
