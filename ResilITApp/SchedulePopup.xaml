@@ -3,7 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:local="clr-namespace:ResilITApp;assembly=ResilITApp"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
     x:Class="ResilITApp.SchedulePopup"
     CloseWhenBackgroundIsClicked="True"
     BackgroundInputTransparent="False">
@@ -30,14 +32,56 @@
         <StackLayout
             Orientation="Horizontal"
             HorizontalOptions="FillAndExpand">
-            <Label x:Name="EventName"
+            <Label x:Name="EventName" StyleClass="title"
                 Text="Title" VerticalTextAlignment="Center"/>
-            <Image BackgroundColor="black" WidthRequest="10" HeightRequest="10" HorizontalOptions="EndAndExpand"/>
+            <Image Source="{local:ImageResource ResilITApp.resources.logo.png}" WidthRequest="50" HeightRequest="50" HorizontalOptions="EndAndExpand"/>
         </StackLayout>
-        <BoxView Color="red" WidthRequest="20" HeightRequest="1"/>
+        <BoxView Color="gray" WidthRequest="20" HeightRequest="1"/>
         <Label x:Name="EventDescription"
-               Text="Description"/>
+               Text="Description" StyleClass="description"/>
         <Label x:Name="EventTime"
-               Text="Time"/>
+               Text="Time" StyleClass="time"/>
+        <StackLayout Grid.Row="3"
+                                 Grid.Column="1"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center">
+                    <syncfusion:SfButton x:Name="iconButton"
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Center"
+                                             HorizontalTextAlignment="Center"
+                                             VerticalTextAlignment="Center"
+                                             Text="&#xEB52;"
+                                             BorderWidth="0"
+                                             FontSize="16"
+                                             WidthRequest="40"
+                                             HeightRequest="40"
+                                             CornerRadius="20"
+                                             IsCheckable="true"
+                                             TextColor="Black"
+                                             BackgroundColor="Transparent" 
+                                             PressedBackgroundColor="Transparent">
+                        <syncfusion:SfButton.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="iOS" Value="Segoe MDL2 Assets" />
+                                <On Platform="Android" Value="button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
+                                <On Platform="UWP" Value="/Assets/Fonts/button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
+                            </OnPlatform>
+                        </syncfusion:SfButton.FontFamily>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Checked" >
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="Accent"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="Black" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </syncfusion:SfButton>
+                </StackLayout>
     </StackLayout>
 </pages:PopupPage>

@@ -111,6 +111,8 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\Segoe MDL2 Assets.ttf" />
+    <BundleResource Include="Resources\button_Segoe MDL2 Assets.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

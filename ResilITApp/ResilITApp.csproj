@@ -53,4 +53,7 @@
     <EmbeddedResource Include="config.json" />
     <EmbeddedResource Include="timetable.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="css\" />
+  </ItemGroup>
 </Project>
