@@ -49,7 +49,7 @@
                Text="Description"
                StyleClass="description" />
 
-        <FlexLayout 
+        <FlexLayout
             VerticalOptions="End"
             Direction="Row">
             <Label x:Name="EventTime"
@@ -58,51 +58,52 @@
                    HorizontalOptions="Start"
                    VerticalOptions="End"
                    FlexLayout.Grow="1"
-                   FlexLayout.AlignSelf="End"/>
-            <syncfusion:SfButton x:Name="iconButton"
-                                 HorizontalOptions="Center"
-                                 VerticalOptions="Center"
-                                 FlexLayout.AlignSelf="End"
-                                 HorizontalTextAlignment="Center"
-                                 VerticalTextAlignment="Center"
-                                 Padding="10,20,0,0"
-                                 Text="&#xEB52;"
-                                 BorderWidth="0"
-                                 FontSize="16"
-                                 WidthRequest="40"
-                                 HeightRequest="40"
-                                 CornerRadius="20"
-                                 IsCheckable="true"
-                                 TextColor="Black"
-                                 BackgroundColor="Transparent"
-                                 PressedBackgroundColor="Transparent">
-                <syncfusion:SfButton.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="iOS"
-                            Value="Segoe MDL2 Assets" />
-                        <On Platform="Android"
-                            Value="button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
-                        <On Platform="UWP"
-                            Value="/Assets/Fonts/button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
-                    </OnPlatform>
-                </syncfusion:SfButton.FontFamily>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Checked">
-                            <VisualState.Setters>
-                                <Setter Property="TextColor"
-                                        Value="Accent" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Unchecked">
-                            <VisualState.Setters>
-                                <Setter Property="TextColor"
-                                        Value="Black" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </syncfusion:SfButton>
+                   FlexLayout.AlignSelf="End" />
+            <StackLayout Margin="0,0,0,-10" VerticalOptions="End" HorizontalOptions="End">
+                <syncfusion:SfButton x:Name="iconButton"
+                                     FlexLayout.AlignSelf="End"
+                                     HorizontalTextAlignment="Center"
+                                     VerticalTextAlignment="Center"
+                                     VerticalOptions="End"
+                                     HorizontalOptions="End"
+                                     Text="&#xEB52;"
+                                     BorderWidth="0"
+                                     FontSize="16"
+                                     WidthRequest="40"
+                                     HeightRequest="40"
+                                     CornerRadius="20"
+                                     IsCheckable="true"
+                                     TextColor="Black"
+                                     BackgroundColor="Transparent"
+                                     PressedBackgroundColor="Transparent">
+                    <syncfusion:SfButton.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS"
+                                Value="Segoe MDL2 Assets" />
+                            <On Platform="Android"
+                                Value="button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
+                            <On Platform="UWP"
+                                Value="/Assets/Fonts/button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
+                        </OnPlatform>
+                    </syncfusion:SfButton.FontFamily>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor"
+                                            Value="Accent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor"
+                                            Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </syncfusion:SfButton>
+            </StackLayout>
         </FlexLayout>
     </StackLayout>
 </pages:PopupPage>
