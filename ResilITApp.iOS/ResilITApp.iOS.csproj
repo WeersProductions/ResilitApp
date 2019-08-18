@@ -113,6 +113,9 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <BundleResource Include="Resources\Segoe MDL2 Assets.ttf" />
     <BundleResource Include="Resources\button_Segoe MDL2 Assets.ttf" />
+    <BundleResource Include="Resources\profile_picture.png">
+      <LogicalName>ResilITApp.iOS.Resources.profile_picture.png</LogicalName>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

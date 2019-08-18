@@ -99,6 +99,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\button_Segoe MDL2 Assets.ttf" />
     <AndroidAsset Include="Assets\navigation.ttf" />
+    <AndroidAsset Include="Assets\profile_picture.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

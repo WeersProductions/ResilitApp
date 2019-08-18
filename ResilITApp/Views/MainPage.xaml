@@ -68,7 +68,7 @@
                     <RowDefinition Height="80" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <Image Source="user.png"
+                <Image Source="profile_picture.png"
                        HeightRequest="80"
                        Margin="0,10,0,0"
                        BackgroundColor="#1aa1d6"
@@ -110,7 +110,8 @@
                            HorizontalOptions="Start" />
                     <Label Text="ResilIT"
                            VerticalOptions="Center"
-                           HorizontalOptions="Center" />
+                           HorizontalOptions="Center"
+                           TextColor="white"/>
                 </StackLayout>
             </Grid>
         </navigationdrawer:SfNavigationDrawer.DrawerFooterView>
