@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:svg="clr-namespace:ResilITApp"
+             xmlns:local="clr-namespace:ResilITApp;assembly=ResilITApp"
+             xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+             xmlns:pdfviewer="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms"
+             xmlns:schedule="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
+             xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+             xmlns:numerictextbox="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
+             xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+             xmlns:radialMenu="clr-namespace:Syncfusion.SfRadialMenu.XForms;assembly=Syncfusion.SfRadialMenu.XForms"
+             xmlns:pulltorefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+             xmlns:dataform="clr-namespace:Syncfusion.XForms.DataForm;assembly=Syncfusion.SfDataForm.XForms"
+             xmlns:popuplayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+             xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+             xmlns:checkbox="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
+             x:Class="ResilITApp.MainPage">
+
+    <navigationdrawer:SfNavigationDrawer x:Name="navigationDrawer"
+                                         DrawerWidth="200"
+                                         DrawerHeaderHeight="110"
+                                         DrawerFooterHeight="40">
+        <navigationdrawer:SfNavigationDrawer.ContentView>
+            <Grid x:Name="mainContentView"
+                  BackgroundColor="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackLayout BackgroundColor="#1aa1d6"
+                             Orientation="Horizontal">
+                    <Button x:Name="hamburgerButton"
+                            HeightRequest="50"
+                            WidthRequest="50"
+                            HorizontalOptions="Start"
+                            FontSize="20"
+                            BackgroundColor="#1aa1d6"
+                            Clicked="hamburgerButton_Clicked" />
+                    <Label x:Name="headerLabel"
+                           HeightRequest="50"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Text="Home"
+                           FontSize="16"
+                           TextColor="White"
+                           BackgroundColor="#1aa1d6" />
+                </StackLayout>
+                <ContentView x:Name="appContent"
+                             Grid.Row="1" />
+            </Grid>
+        </navigationdrawer:SfNavigationDrawer.ContentView>
+        <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
+            <Grid BackgroundColor="#1aa1d6"
+                  Margin="5,5,5,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Image Source="profile_picture.png"
+                       HeightRequest="80"
+                       Margin="0,10,0,0"
+                       BackgroundColor="#1aa1d6"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+                <Label Text="Firsname lastname"
+                       Grid.Row="1"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       FontSize="20"
+                       TextColor="White" />
+            </Grid>
+        </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
+        <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+            <ListView x:Name="listView"
+                      ItemSelected="listView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HeightRequest="40">
+                                <Label Margin="10,7,0,0"
+                                       Text="{Binding}"
+                                       StyleClass="menuItem" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+        <navigationdrawer:SfNavigationDrawer.DrawerFooterView>
+            <StackLayout Orientation="Horizontal"
+                         BackgroundColor="#1aa1d6"
+                         Padding="0,5,0,0">
+                <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
+                       HeightRequest="40"
+                       Aspect="AspectFit" />
+                <Label Text="ResilIT"
+                       TextColor="white"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+        </navigationdrawer:SfNavigationDrawer.DrawerFooterView>
+    </navigationdrawer:SfNavigationDrawer>
+
+</ContentPage>

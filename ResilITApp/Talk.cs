@@ -9,5 +9,6 @@ namespace ResilITApp
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public Color Color { get; set; }
+        public string SubTitle { get; set; }
     }
 }
