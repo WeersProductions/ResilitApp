@@ -21,12 +21,19 @@ namespace ResilITApp
 
         private void InitializeMenuItems()
         {
-            List<string> list = new List<string>
+            List<string> list = new List<string>();
+
+            if(!Login.Instance.IsLoggedIn)
             {
-                "General",
-                "Favorites",
-                "Logout"
-            };
+                list.Add("Login");
+            }
+            list.Add("General");
+            if(Login.Instance.IsLoggedIn)
+            {
+                list.Add("Favorites");
+                list.Add("Logout");
+            }
+
             listView.ItemsSource = list;
         }
 
@@ -66,18 +73,55 @@ namespace ResilITApp
             hamburgerButton.TextColor = Color.White;
         }
 
+        protected override void OnAppearing()
+        {
+            appContent.Content = Activator.CreateInstance<TimeTable>();
+        }
+
         private void hamburgerButton_Clicked(object sender, EventArgs e)
         {
+            InitializeMenuItems();
             navigationDrawer.ToggleDrawer();
         }
 
-        private void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            if(e.SelectedItem == null)
+            {
+                return;
+            }
+            // TODO: set based on the content afterwards, since based on popups different pages are shown.
             headerLabel.Text = e.SelectedItem.ToString();
 
-            appContent.Content = Activator.CreateInstance<TimeTable>();
+            bool doToggleDrawer = true;
 
-            navigationDrawer.ToggleDrawer();
+            if(e.SelectedItem.ToString() == "Login")
+            {
+                appContent.Content = Activator.CreateInstance<LoginPage>();
+            }
+            else if (e.SelectedItem.ToString() == "Logout")
+            {
+                bool logout = await DisplayAlert("Logout", "Are you sure you want to logout?", "logout", "cancel");
+                if(logout)
+                {
+                    Login.Instance.DoLogout();
+                    appContent.Content = Activator.CreateInstance<TimeTable>();
+                }
+                else
+                {
+                    listView.SelectedItem = null;
+                    doToggleDrawer = false;
+                }
+            } else
+            {
+                // TODO: show favorites or general.
+                appContent.Content = Activator.CreateInstance<TimeTable>();
+            }
+
+            if(doToggleDrawer)
+            {
+                navigationDrawer.ToggleDrawer();
+            }
         }
 
         protected override void OnSizeAllocated(double width, double height)

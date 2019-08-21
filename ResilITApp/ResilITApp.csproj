@@ -53,5 +53,7 @@
   <ItemGroup>
     <Folder Include="css\" />
     <Folder Include="Views\" />
+    <Folder Include="Model\" />
+    <Folder Include="Control\" />
   </ItemGroup>
 </Project>

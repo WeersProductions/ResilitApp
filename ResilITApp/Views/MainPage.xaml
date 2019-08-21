@@ -53,17 +53,11 @@
                 </StackLayout>
                 <ContentView x:Name="appContent"
                              Grid.Row="1" />
-                <!--<Label Grid.Row="1" 
-                      x:Name="contentLabel" 
-                      VerticalOptions="Center" 
-                      HorizontalOptions="Center" 
-                      Text="Content View" 
-                      FontSize="14" 
-                      TextColor="Black"/>-->
             </Grid>
         </navigationdrawer:SfNavigationDrawer.ContentView>
         <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
-            <Grid BackgroundColor="#1aa1d6">
+            <Grid BackgroundColor="#1aa1d6"
+                  Margin="5,5,5,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80" />
                     <RowDefinition Height="30" />
@@ -91,7 +85,7 @@
                             <StackLayout HeightRequest="40">
                                 <Label Margin="10,7,0,0"
                                        Text="{Binding}"
-                                       FontSize="16" />
+                                       StyleClass="menuItem" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -99,21 +93,16 @@
             </ListView>
         </navigationdrawer:SfNavigationDrawer.DrawerContentView>
         <navigationdrawer:SfNavigationDrawer.DrawerFooterView>
-            <Grid BackgroundColor="#1aa1d6">
-                <StackLayout Orientation="Horizontal"
-                             VerticalOptions="Center"
-                             HorizontalOptions="Center">
-                    <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
-                           HeightRequest="40"
-                           Aspect="AspectFit"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Start" />
-                    <Label Text="ResilIT"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           TextColor="white"/>
-                </StackLayout>
-            </Grid>
+            <StackLayout Orientation="Horizontal"
+                         BackgroundColor="#1aa1d6"
+                         Padding="0,5,0,0">
+                <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
+                       HeightRequest="40"
+                       Aspect="AspectFit" />
+                <Label Text="ResilIT"
+                       TextColor="white"
+                       VerticalOptions="Center"/>
+            </StackLayout>
         </navigationdrawer:SfNavigationDrawer.DrawerFooterView>
     </navigationdrawer:SfNavigationDrawer>
 

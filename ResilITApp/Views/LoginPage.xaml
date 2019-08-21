@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:resilitapp="clr-namespace:ResilITApp"
+             x:Class="ResilITApp.LoginPage">
+    <ContentView.BindingContext>
+        <resilitapp:SignInViewModel/>
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <StackLayout Margin="20,0,20,20"
+                     Spacing="10">
+            <inputLayout:SfTextInputLayout
+                Hint="Email"
+                ContainerType="Outlined"
+                ErrorText="Enter a valid email address"
+                HasError="{Binding HasError}">
+                <Entry x:Name="InputEmail" Text="{Binding Mail}" Keyboard="Email" ReturnType="Next"/>
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout
+                Hint="Password"
+                ContainerType="Outlined"
+                EnablePasswordVisibilityToggle="True"
+                HasError="{Binding IsPasswordEmpty}"
+                ErrorText="Enter a password">
+                <Entry x:Name="InputPassword" IsPassword="True" Text="{Binding Password}" ReturnType="Done" ReturnCommand="{Binding SubmitCommand}"/>
+            </inputLayout:SfTextInputLayout>
+
+            <Button x:Name="submitButton"
+                    Command="{Binding SubmitCommand}"
+                    Text="Submit"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
