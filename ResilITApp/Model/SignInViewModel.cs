@@ -92,7 +92,7 @@ namespace ResilITApp
             else if (!isPasswordEmpty)
             {
                 Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
-                Login.Instance.DoLogin();
+                Login.Instance.DoLogin(new Model.SignInModel() { email = Mail, password = Password});
                 // TODO: show favorites
             }
         }
