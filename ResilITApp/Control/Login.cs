@@ -51,7 +51,7 @@ namespace ResilITApp
             IsLoggedIn = false;
         }
 
-        public async void DoLogin(SignInModel user)
+        public async System.Threading.Tasks.Task<bool> DoLoginAsync(SignInModel user)
         {
             var formContent = new FormUrlEncodedContent(new[]
             {
@@ -65,13 +65,11 @@ namespace ResilITApp
             {
                 // We failed.
                 IsLoggedIn = false;
-                // TODO: send feedback to user that login is wrong.
-                return;
+                return false;
             }
 
-            var response = await request.Content.ReadAsStringAsync();
-
             IsLoggedIn = true;
+            return true;
         }
     }
 }

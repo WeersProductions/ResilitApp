@@ -81,7 +81,7 @@ namespace ResilITApp
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SubmitButtonClicked(object obj)
+        private async void SubmitButtonClicked(object obj)
         {
             IsPasswordEmpty = string.IsNullOrEmpty(Password);
 
@@ -91,9 +91,15 @@ namespace ResilITApp
             }
             else if (!isPasswordEmpty)
             {
-                Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
-                Login.Instance.DoLogin(new Model.SignInModel() { email = Mail, password = Password});
-                // TODO: show favorites
+                bool success = await Login.Instance.DoLoginAsync(new Model.SignInModel { email = Mail, password = Password });
+                if(success)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Failed", "Incorrect username or password.", "OK");
+                }
             }
         }
     }
