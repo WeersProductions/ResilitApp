@@ -20,3 +20,8 @@ label {
 .menuItem {
     font-size: 16;
 }
+
+.mainName {
+    font-size: 20;
+    color: white;
+}

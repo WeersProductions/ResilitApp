@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
+using ResilITApp.Control;
 using ResilITApp.Model;
+using Xamarin.Forms;
 
 namespace ResilITApp
 {
@@ -29,8 +31,11 @@ namespace ResilITApp
         private const string URL = "http://10.0.2.2";
         private HttpClient _client;
 
+        private List<IUserObserver> _observers;
+
         public Login () {
-			_client = new HttpClient();
+            _observers = new List<IUserObserver>();
+            _client = new HttpClient();
 		}
 
         private bool isLoggedIn;
@@ -43,6 +48,41 @@ namespace ResilITApp
             set
             {
                 isLoggedIn = value;
+                if(isLoggedIn)
+                {
+                    GetUser();
+                }
+            }
+        }
+
+        private UserModel user;
+        public UserModel User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                // TODO: add caching with time here.
+                bool lost = user != null && value == null;
+                if (lost)
+                {
+                    foreach(IUserObserver observer in _observers)
+                    {
+                        observer.OnUserLost();
+                    }
+                }
+
+                user = value;
+
+                if(!lost)
+                {
+                    foreach (IUserObserver observer in _observers)
+                    {
+                        observer.OnUserReceived(user);
+                    }
+                }
             }
         }
 
@@ -70,6 +110,30 @@ namespace ResilITApp
 
             IsLoggedIn = true;
             return true;
+        }
+
+        public async System.Threading.Tasks.Task<bool> GetUser()
+        {
+            var request = await _client.GetAsync(URL + "/api/user");
+            if(!request.IsSuccessStatusCode)
+            {
+                //TODO: try again?
+                return false;
+            }
+
+            string json = await request.Content.ReadAsStringAsync();
+
+            User = JsonConvert.DeserializeObject<UserModel>(json);
+
+            return true;
+        }
+
+        public void AddUserObserver(IUserObserver observer)
+        {
+            if(!_observers.Contains(observer))
+            {
+                _observers.Add(observer);
+            }
         }
     }
 }

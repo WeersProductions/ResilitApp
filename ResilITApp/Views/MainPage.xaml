@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:svg="clr-namespace:ResilITApp"
              xmlns:local="clr-namespace:ResilITApp;assembly=ResilITApp"
+             xmlns:viewModels="clr-namespace:ResilITApp.Model"
              xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
              xmlns:pdfviewer="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms"
              xmlns:schedule="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
@@ -21,7 +22,7 @@
              xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
              x:Class="ResilITApp.MainPage">
-
+    
     <navigationdrawer:SfNavigationDrawer x:Name="navigationDrawer"
                                          DrawerWidth="200"
                                          DrawerHeaderHeight="110"
@@ -58,6 +59,9 @@
         <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
             <Grid BackgroundColor="#1aa1d6"
                   Margin="5,5,5,5">
+                <Grid.BindingContext>
+                    <viewModels:MainViewModel/>
+                </Grid.BindingContext>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80" />
                     <RowDefinition Height="30" />
@@ -68,12 +72,16 @@
                        BackgroundColor="#1aa1d6"
                        VerticalOptions="Center"
                        HorizontalOptions="Center" />
-                <Label Text="Firsname lastname"
+                <Label Text="{Binding Firstname}"
+                       StyleClass="mainName"
                        Grid.Row="1"
+                       Grid.Column="0"
                        HorizontalTextAlignment="Center"
-                       HorizontalOptions="Center"
-                       FontSize="20"
-                       TextColor="White" />
+                       HorizontalOptions="Center"/>
+                <Label Text="{Binding Lastname}"
+                       StyleClass="mainName"
+                       Grid.Row="1"
+                       Grid.Column="1"/>
             </Grid>
         </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
         <navigationdrawer:SfNavigationDrawer.DrawerContentView>
