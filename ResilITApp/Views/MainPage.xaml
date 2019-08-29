@@ -72,16 +72,8 @@
                        BackgroundColor="#1aa1d6"
                        VerticalOptions="Center"
                        HorizontalOptions="Center" />
-                <Label Text="{Binding Firstname}"
-                       StyleClass="mainName"
-                       Grid.Row="1"
-                       Grid.Column="0"
-                       HorizontalTextAlignment="Center"
-                       HorizontalOptions="Center"/>
-                <Label Text="{Binding Lastname}"
-                       StyleClass="mainName"
-                       Grid.Row="1"
-                       Grid.Column="1"/>
+                <Label Text="{Binding Fullname}"
+                           StyleClass="mainName"/>
             </Grid>
         </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
         <navigationdrawer:SfNavigationDrawer.DrawerContentView>

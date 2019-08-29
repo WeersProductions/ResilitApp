@@ -19,7 +19,7 @@ namespace ResilITApp.Model
             set
             {
                 firstname = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged("Fullname");
             }
         }
 
@@ -33,7 +33,15 @@ namespace ResilITApp.Model
             set
             {
                 lastname = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged("Fullname");
+            }
+        }
+
+        public string Fullname
+        {
+            get
+            {
+                return string.Format("{0} {1}", Firstname, Lastname);
             }
         }
 

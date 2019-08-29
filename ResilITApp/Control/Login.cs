@@ -89,6 +89,7 @@ namespace ResilITApp
         public void DoLogout()
         {
             IsLoggedIn = false;
+            User = null;
         }
 
         public async System.Threading.Tasks.Task<bool> DoLoginAsync(SignInModel user)
