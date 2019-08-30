@@ -115,6 +115,7 @@ namespace ResilITApp
                 DateTime to = Convert.ToDateTime(data.endTime).ToUniversalTime();
                 result.Add(new Talk()
                 {
+                    Id = data.id,
                     EventName = data.title,
                     From = new DateTime(2019, 11, 26, from.Hour, from.Minute, from.Second),
                     To = new DateTime(2019, 11, 26, to.Hour, to.Minute, to.Second),

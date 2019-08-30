@@ -93,6 +93,7 @@ namespace ResilITApp
             }
             else if (!isPasswordEmpty)
             {
+                // TODO: check for connection instead of crash
                 bool success = await Login.Instance.DoLoginAsync(new Model.SignInModel { email = Mail, password = Password });
                 AppController.RemoveBusy(this);
                 if (success)

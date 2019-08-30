@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ResilITApp.Control;
 using ResilITApp.Model;
@@ -113,8 +114,14 @@ namespace ResilITApp
             return true;
         }
 
-        public async System.Threading.Tasks.Task<bool> GetUser()
+        public async Task<bool> GetUser(bool forceRefresh = false)
         {
+            // TODO: auto refresh every x time. 
+            if(User != null && !forceRefresh)
+            {
+                return true;
+            }
+
             var request = await _client.GetAsync(URL + "/api/user");
             if(!request.IsSuccessStatusCode)
             {
@@ -129,12 +136,39 @@ namespace ResilITApp
             return true;
         }
 
+        public async Task<UserModel> GiveUser(bool forceRefresh = false)
+        {
+            await GetUser(forceRefresh);
+            return User;
+        }
+
         public void AddUserObserver(IUserObserver observer)
         {
             if(!_observers.Contains(observer))
             {
                 _observers.Add(observer);
             }
+        }
+
+        public async Task<HttpMessage> DoPost(string url)
+        {
+            if(!url.StartsWith("/", StringComparison.Ordinal))
+            {
+                url = $"/{url}";
+            }
+
+            HttpMessage result = new HttpMessage();
+            var request = await _client.PostAsync(URL + url, new StringContent(""));
+
+            result.Success = request.IsSuccessStatusCode;
+            if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
+            {
+                // we're not logged in. The user should log in again.
+                result.Message = "Not logged in.";
+                result.Success = false;
+            }
+            result.Response = request;
+            return result;
         }
     }
 }

@@ -16,5 +16,6 @@ namespace ResilITApp.Model
         public bool bus { get; set; }
         public string phonenumber { get; set; }
         public string linkedin { get; set; }
+        public int[] favorites { get; set; }
     }
 }

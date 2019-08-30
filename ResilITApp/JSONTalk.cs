@@ -5,6 +5,7 @@ namespace ResilITApp
 {
     public class JSONTalk
     {
+        public int id { get; set; }
         public string title { get; set; }
         public string subTitle { get; set; }
         public string startTime { get; set; }

@@ -5,6 +5,7 @@ namespace ResilITApp
 {
     public class Talk
     {
+        public int Id { get; set; }
         public string EventName { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }

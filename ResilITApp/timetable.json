@@ -10,6 +10,7 @@
             "location": "first location",
             "talks": [
                 {
+                    "id": 0,
                     "startTime": "12:00:00.000Z",
                     "endTime": "14:00:00.000Z",
                     "capacity": 5,
@@ -18,6 +19,7 @@
                     "subTitle": "First talk first talk first talk first talk first talk. Another sentence, with a comma. Third sentence, without a comma (I lied)."
                 },
                 {
+                    "id": 1,
                     "startTime": "15:00:00.000Z",
                     "endTime": "16:00:00.000Z",
                     "capacity": 20,
@@ -34,6 +36,7 @@
             "location": "second location",
             "talks": [
                 {
+                    "id": 2,
                     "startTime": "11:00:00.000Z",
                     "endTime": "14:00:00.000Z",
                     "capacity": 35,
@@ -42,6 +45,7 @@
                     "subTitle": "First talk of second track"
                 },
                 {
+                    "id": 3,
                     "startTime": "14:00:00.000Z",
                     "endTime": "16:00:00.000Z",
                     "capacity": 25,
@@ -57,6 +61,7 @@
             "location": "third location",
             "talks": [
                 {
+                    "id": 4,
                     "startTime": "11:00:00.000Z",
                     "endTime": "12:00:00.000Z",
                     "capacity": 9,
@@ -66,6 +71,7 @@
                     "subTitle": "First talk of third track"
                 },
                 {
+                    "id": 5,
                     "startTime": "12:00:00.000Z",
                     "endTime": "13:00:00.000Z",
                     "capacity": 45,
