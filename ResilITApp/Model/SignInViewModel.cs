@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using ResilITApp.Control;
 using Xamarin.Forms;
 
 namespace ResilITApp
@@ -83,6 +84,7 @@ namespace ResilITApp
 
         private async void SubmitButtonClicked(object obj)
         {
+            AppController.AddBusy(this);
             IsPasswordEmpty = string.IsNullOrEmpty(Password);
 
             if(string.IsNullOrEmpty(Mail) || !mail.Contains("@") || !mail.Contains("."))
@@ -92,7 +94,8 @@ namespace ResilITApp
             else if (!isPasswordEmpty)
             {
                 bool success = await Login.Instance.DoLoginAsync(new Model.SignInModel { email = Mail, password = Password });
-                if(success)
+                AppController.RemoveBusy(this);
+                if (success)
                 {
                     await Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
                 }
@@ -101,6 +104,7 @@ namespace ResilITApp
                     await Application.Current.MainPage.DisplayAlert("Failed", "Incorrect username or password.", "OK");
                 }
             }
+            AppController.RemoveBusy(this);
         }
     }
 }

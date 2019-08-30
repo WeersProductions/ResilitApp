@@ -22,88 +22,99 @@
              xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
              x:Class="ResilITApp.MainPage">
-    
-    <navigationdrawer:SfNavigationDrawer x:Name="navigationDrawer"
-                                         DrawerWidth="200"
-                                         DrawerHeaderHeight="110"
-                                         DrawerFooterHeight="40">
-        <navigationdrawer:SfNavigationDrawer.ContentView>
-            <Grid x:Name="mainContentView"
-                  BackgroundColor="White">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <StackLayout BackgroundColor="#1aa1d6"
-                             Orientation="Horizontal">
-                    <Button x:Name="hamburgerButton"
-                            HeightRequest="50"
-                            WidthRequest="50"
-                            HorizontalOptions="Start"
-                            FontSize="20"
-                            BackgroundColor="#1aa1d6"
-                            Clicked="hamburgerButton_Clicked" />
-                    <Label x:Name="headerLabel"
-                           HeightRequest="50"
-                           HorizontalTextAlignment="Center"
-                           VerticalTextAlignment="Center"
-                           Text="Home"
-                           FontSize="16"
-                           TextColor="White"
-                           BackgroundColor="#1aa1d6" />
+    <Grid>
+        <navigationdrawer:SfNavigationDrawer x:Name="navigationDrawer"
+                                             DrawerWidth="200"
+                                             DrawerHeaderHeight="110"
+                                             DrawerFooterHeight="40">
+            <navigationdrawer:SfNavigationDrawer.ContentView>
+                <Grid x:Name="mainContentView"
+                      BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackLayout BackgroundColor="#1aa1d6"
+                                 Orientation="Horizontal">
+                        <Button x:Name="hamburgerButton"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                HorizontalOptions="Start"
+                                FontSize="20"
+                                BackgroundColor="#1aa1d6"
+                                Clicked="hamburgerButton_Clicked" />
+                        <Label x:Name="headerLabel"
+                               HeightRequest="50"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               Text="Home"
+                               FontSize="16"
+                               TextColor="White"
+                               BackgroundColor="#1aa1d6" />
+                    </StackLayout>
+                    <ContentView x:Name="appContent"
+                                 Grid.Row="1" />
+                </Grid>
+            </navigationdrawer:SfNavigationDrawer.ContentView>
+            <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
+                <Grid BackgroundColor="#1aa1d6"
+                      Margin="5,5,5,5">
+                    <Grid.BindingContext>
+                        <viewModels:MainViewModel />
+                    </Grid.BindingContext>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <Image Source="profile_picture.png"
+                           HeightRequest="80"
+                           Margin="0,10,0,0"
+                           BackgroundColor="#1aa1d6"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                    <Label Text="{Binding Fullname}"
+                           StyleClass="mainName" />
+                </Grid>
+            </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
+            <navigationdrawer:SfNavigationDrawer.DrawerContentView>
+                <ListView x:Name="listView"
+                          ItemSelected="listView_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout HeightRequest="40">
+                                    <Label Margin="10,7,0,0"
+                                           Text="{Binding}"
+                                           StyleClass="menuItem" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </navigationdrawer:SfNavigationDrawer.DrawerContentView>
+            <navigationdrawer:SfNavigationDrawer.DrawerFooterView>
+                <StackLayout Orientation="Horizontal"
+                             BackgroundColor="#1aa1d6"
+                             Padding="0,5,0,0">
+                    <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
+                           HeightRequest="40"
+                           Aspect="AspectFit" />
+                    <Label Text="ResilIT"
+                           TextColor="white"
+                           VerticalOptions="Center" />
                 </StackLayout>
-                <ContentView x:Name="appContent"
-                             Grid.Row="1" />
-            </Grid>
-        </navigationdrawer:SfNavigationDrawer.ContentView>
-        <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
-            <Grid BackgroundColor="#1aa1d6"
-                  Margin="5,5,5,5">
-                <Grid.BindingContext>
-                    <viewModels:MainViewModel/>
-                </Grid.BindingContext>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="30" />
-                </Grid.RowDefinitions>
-                <Image Source="profile_picture.png"
-                       HeightRequest="80"
-                       Margin="0,10,0,0"
-                       BackgroundColor="#1aa1d6"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center" />
-                <Label Text="{Binding Fullname}"
-                           StyleClass="mainName"/>
-            </Grid>
-        </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
-        <navigationdrawer:SfNavigationDrawer.DrawerContentView>
-            <ListView x:Name="listView"
-                      ItemSelected="listView_ItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout HeightRequest="40">
-                                <Label Margin="10,7,0,0"
-                                       Text="{Binding}"
-                                       StyleClass="menuItem" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </navigationdrawer:SfNavigationDrawer.DrawerContentView>
-        <navigationdrawer:SfNavigationDrawer.DrawerFooterView>
-            <StackLayout Orientation="Horizontal"
-                         BackgroundColor="#1aa1d6"
-                         Padding="0,5,0,0">
-                <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
-                       HeightRequest="40"
-                       Aspect="AspectFit" />
-                <Label Text="ResilIT"
-                       TextColor="white"
-                       VerticalOptions="Center"/>
-            </StackLayout>
-        </navigationdrawer:SfNavigationDrawer.DrawerFooterView>
-    </navigationdrawer:SfNavigationDrawer>
-
+            </navigationdrawer:SfNavigationDrawer.DrawerFooterView>
+        </navigationdrawer:SfNavigationDrawer>
+        <busyindicator:SfBusyIndicator
+            x:Name="busyIndicator"
+            AnimationType="Ball"
+            ViewBoxWidth="150"
+            ViewBoxHeight="150"
+            EnableAnimation="True"
+            IsBusy="{Binding IsBussy}">
+            <busyindicator:SfBusyIndicator.BindingContext>
+                <viewModels:AppModel/>
+            </busyindicator:SfBusyIndicator.BindingContext>
+        </busyindicator:SfBusyIndicator>
+    </Grid>
 </ContentPage>
