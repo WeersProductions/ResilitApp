@@ -11,6 +11,7 @@ using Syncfusion.SfSchedule.XForms;
 using Rg.Plugins.Popup.Extensions;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace ResilITApp
 {
@@ -39,7 +40,8 @@ namespace ResilITApp
 
         public ScheduleViewModel()
         {
-            Talks = GetTalks();
+            Talks = new ObservableCollection<Talk>();
+            _ = GetTalks();
             ScheduleCellTapped = new Command<CellTappedEventArgs>(CellTapped);
             ScheduleCellDoubleTapped = new Command<CellTappedEventArgs>(DoubleTapped);
             ScheduleCellLongPressed = new Command<CellTappedEventArgs>(LongPressed);
@@ -85,27 +87,40 @@ namespace ResilITApp
             using (var reader = new StreamReader(stream))
             {
                 var json = reader.ReadToEnd();
-                JSONTimetable jsonResult = JsonConvert.DeserializeObject<JSONTimetable>(json);
-                List<JSONTalk> result = new List<JSONTalk>();
-                int index = 0;
-                foreach (JSONTrack jsonTrack in jsonResult.tracks)
-                {
-                    foreach(JSONTalk jsonTalk in jsonTrack.talks)
-                    {
-                        jsonTalk.color = ScheduleColors[index];
-                        result.Add(jsonTalk);
-                    }
-                    index += 1;
-                }
-                return result;
+                return FromJSON(json);
             }
         }
 
-        private ObservableCollection<Talk> GetTalks()
+        private async Task<List<JSONTalk>> GetJSONTalksFromWeb()
+        {
+            string json = await GetSchedule.GetScheduleJSON();
+            return FromJSON(json);
+        }
+
+        private List<JSONTalk> FromJSON(string json)
+        {
+            JSONTimetable jsonResult = JsonConvert.DeserializeObject<JSONTimetable>(json);
+            List<JSONTalk> result = new List<JSONTalk>();
+            int index = 0;
+            foreach (JSONTrack jsonTrack in jsonResult.tracks)
+            {
+                foreach (JSONTalk jsonTalk in jsonTrack.talks)
+                {
+                    jsonTalk.color = ScheduleColors[index];
+                    result.Add(jsonTalk);
+                }
+                index += 1;
+            }
+            return result;
+        }
+
+        private async Task GetTalks()
         {
             var result = new ObservableCollection<Talk>();
 
-            foreach (var data in GetJSONTalks())
+            List<JSONTalk> jsonTalks = await GetJSONTalksFromWeb();
+
+            foreach (var data in jsonTalks)
             {
                 if (!data.enabled)
                 {
@@ -123,7 +138,12 @@ namespace ResilITApp
                     SubTitle = data.subTitle
                 });
             }
-            return result;
+
+            Talks.Clear();
+            foreach (var talk in result)
+            {
+                Talks.Add(talk);
+            }
         }
     }
 }

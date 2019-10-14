@@ -27,6 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidHttpClientHandlerType>System.Net.Http.HttpClientHandler</AndroidHttpClientHandlerType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,23 +71,23 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfRadialMenu" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.2.0.41" />
-    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.2.0.41" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfSchedule" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRadialMenu" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericUpDown" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNumericTextBox" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfNavigationDrawer" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataGrid" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfDataForm" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.3.0.14" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.3.0.14" />
     <PackageReference Include="Syncfusion.Xamarin.Expander " Version="17.2.0.39" />
   </ItemGroup>
   <ItemGroup>

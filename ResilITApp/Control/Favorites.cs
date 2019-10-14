@@ -9,13 +9,13 @@ namespace ResilITApp.Control
     {
         public async static Task<bool> AddFavorite(Talk talk)
         {
-            HttpMessage response = await Login.Instance.DoPost($"/api/favorite/add/{talk.Id}");
+            HttpMessage response = await Login.Instance.DoPost($"api/favorite/add/{talk.Id}");
             return response.Success;
         }
 
         public async static Task<bool> RemoveFavorite(Talk talk)
         {
-            HttpMessage response = await Login.Instance.DoPost($"/api/favorite/remove/{talk.Id}");
+            HttpMessage response = await Login.Instance.DoPost($"api/favorite/remove/{talk.Id}");
             return response.Success;
         }
 

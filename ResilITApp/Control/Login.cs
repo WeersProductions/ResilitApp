@@ -29,14 +29,18 @@ namespace ResilITApp
             }
         }
 
-        private const string URL = "http://10.0.2.2";
+        private const string URL = "https://www.resilit.snic.nl/";
         private HttpClient _client;
 
         private List<IUserObserver> _observers;
 
         public Login () {
             _observers = new List<IUserObserver>();
-            _client = new HttpClient();
+            var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+            _client = new HttpClient(httpClientHandler);
+            _client.BaseAddress = new Uri(URL);
+            
 		}
 
         private bool isLoggedIn;
@@ -100,10 +104,9 @@ namespace ResilITApp
                 new KeyValuePair<string, string>("email", user.email),
                 new KeyValuePair<string, string>("password", user.password),
             });
-
-            var request = await _client.PostAsync(URL + "/login", formContent);
-            request.EnsureSuccessStatusCode();
-            if (request.RequestMessage.RequestUri.AbsolutePath == "/login")
+            var request = await _client.PostAsync("login", formContent);
+            string json = await request.Content.ReadAsStringAsync();
+            if (json.Contains("/login"))
             {
                 // We failed.
                 IsLoggedIn = false;
@@ -122,7 +125,7 @@ namespace ResilITApp
                 return true;
             }
 
-            var request = await _client.GetAsync(URL + "/api/user");
+            var request = await _client.GetAsync("api/user");
             if(!request.IsSuccessStatusCode)
             {
                 //TODO: try again?
@@ -150,15 +153,36 @@ namespace ResilITApp
             }
         }
 
-        public async Task<HttpMessage> DoPost(string url)
+        public async Task<HttpMessage> DoGet(string url)
         {
-            if(!url.StartsWith("/", StringComparison.Ordinal))
+            if (url.StartsWith("/", StringComparison.Ordinal))
             {
-                url = $"/{url}";
+                url = url.Substring(1);
             }
 
             HttpMessage result = new HttpMessage();
-            var request = await _client.PostAsync(URL + url, new StringContent(""));
+            var request = await _client.GetAsync(url);
+
+            result.Success = request.IsSuccessStatusCode;
+            if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
+            {
+                // we're not logged in. The user should log in again.
+                result.Message = "Not logged in.";
+                result.Success = false;
+            }
+            result.Response = request;
+            return result;
+        }
+
+        public async Task<HttpMessage> DoPost(string url)
+        {
+            if(url.StartsWith("/", StringComparison.Ordinal))
+            {
+                url = url.Substring(1);
+            }
+
+            HttpMessage result = new HttpMessage();
+            var request = await _client.PostAsync(url, new StringContent(""));
 
             result.Success = request.IsSuccessStatusCode;
             if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
