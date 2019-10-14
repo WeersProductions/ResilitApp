@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:local="clr-namespace:ResilITApp;assembly=ResilITApp"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    x:Class="ResilITApp.SchedulePopup"
+    CloseWhenBackgroundIsClicked="True"
+    BackgroundInputTransparent="False">
+    <!--You can set an animation in the xaml file or in the csharp code behind-->
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+    <StackLayout
+        VerticalOptions="Center"
+        HorizontalOptions="Center"
+        Margin="20, 20, 20, 20"
+        Padding="20, 20, 20, 20"
+        BackgroundColor="white"
+        Orientation="Vertical">
+        <StackLayout
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand">
+            <Label x:Name="EventName"
+                   StyleClass="title"
+                   Text="Title"
+                   VerticalTextAlignment="Center" />
+            <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   HorizontalOptions="EndAndExpand" />
+        </StackLayout>
+        <BoxView Color="gray"
+                 WidthRequest="20"
+                 HeightRequest="1" />
+        <Label x:Name="EventDescription"
+               Text="Description"
+               StyleClass="description" />
+
+        <FlexLayout
+            VerticalOptions="End"
+            Direction="Row">
+            <Label x:Name="EventTime"
+                   Text="Time"
+                   StyleClass="time"
+                   HorizontalOptions="Start"
+                   VerticalOptions="End"
+                   FlexLayout.Grow="1"
+                   FlexLayout.AlignSelf="End" />
+            <StackLayout Margin="0,0,0,-10" VerticalOptions="End" HorizontalOptions="End">
+                <syncfusion:SfButton x:Name="iconButton"
+                                     FlexLayout.AlignSelf="End"
+                                     HorizontalTextAlignment="Center"
+                                     VerticalTextAlignment="Center"
+                                     VerticalOptions="End"
+                                     HorizontalOptions="End"
+                                     Text="&#xEB52;"
+                                     BorderWidth="0"
+                                     FontSize="16"
+                                     WidthRequest="40"
+                                     HeightRequest="40"
+                                     CornerRadius="20"
+                                     IsCheckable="true"
+                                     TextColor="Black"
+                                     BackgroundColor="Transparent"
+                                     PressedBackgroundColor="Transparent">
+                    <syncfusion:SfButton.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="iOS"
+                                Value="Segoe MDL2 Assets" />
+                            <On Platform="Android"
+                                Value="button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
+                            <On Platform="UWP"
+                                Value="/Assets/Fonts/button_Segoe MDL2 Assets.ttf#Segoe MDL2 Assets" />
+                        </OnPlatform>
+                    </syncfusion:SfButton.FontFamily>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor"
+                                            Value="Accent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor"
+                                            Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </syncfusion:SfButton>
+            </StackLayout>
+        </FlexLayout>
+    </StackLayout>
+</pages:PopupPage>

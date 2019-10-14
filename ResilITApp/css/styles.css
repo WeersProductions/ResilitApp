@@ -1,0 +1,27 @@
+﻿body {
+}
+
+label {
+    font-size: 14;
+}
+
+.time {
+    font-size: 10;
+}
+
+.description {
+    font-size: 12;
+}
+
+.title {
+    font-size: 18;
+}
+
+.menuItem {
+    font-size: 16;
+}
+
+.mainName {
+    font-size: 20;
+    color: white;
+}

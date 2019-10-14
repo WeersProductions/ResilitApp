@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:svg="clr-namespace:ResilITApp"
+             xmlns:local="clr-namespace:ResilITApp;assembly=ResilITApp"
+             xmlns:datagrid="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+			xmlns:pdfviewer="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms"
+			xmlns:schedule="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
+			xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+			xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+			xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+			xmlns:navigationdrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+			xmlns:numerictextbox="clr-namespace:Syncfusion.SfNumericTextBox.XForms;assembly=Syncfusion.SfNumericTextBox.XForms"
+			xmlns:numericupdown="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+			xmlns:radialMenu="clr-namespace:Syncfusion.SfRadialMenu.XForms;assembly=Syncfusion.SfRadialMenu.XForms"
+			xmlns:pulltorefresh="clr-namespace:Syncfusion.SfPullToRefresh.XForms;assembly=Syncfusion.SfPullToRefresh.XForms"
+			xmlns:dataform="clr-namespace:Syncfusion.XForms.DataForm;assembly=Syncfusion.SfDataForm.XForms"
+			xmlns:popuplayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+			xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+			xmlns:checkbox="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+			xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+			xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
+             x:Class="ResilITApp.TimeTable">
+
+    <StackLayout VerticalOptions="FillAndExpand">
+        <!--Menu bar-->
+        
+
+        <!--Content-->
+        <schedule:SfSchedule VerticalOptions="FillAndExpand"
+                             ScheduleView ="TimelineView"
+                             TimeInterval="15"
+                             TimeIntervalHeight="180"
+                             MoveToDate="2019-11-26"
+                             MinDisplayDate="2019-11-26T08:00:00"
+                             MaxDisplayDate="2019-11-26T22:00:00"
+                             CellTappedCommand="{Binding ScheduleCellTapped}"
+	                         CellDoubleTappedCommand="{Binding ScheduleCellDoubleTapped}"
+	                         CellLongPressedCommand="{Binding ScheduleCellLongPressed}"
+	                         VisibleDatesChangedCommand="{Binding ScheduleVisibleDatesChanged}"
+                             DataSource="{Binding Talks}">
+            <schedule:SfSchedule.BindingContext>
+                <local:ScheduleViewModel/>
+            </schedule:SfSchedule.BindingContext>
+            <schedule:SfSchedule.AppointmentMapping>
+                <schedule:ScheduleAppointmentMapping
+                    ColorMapping="Color"
+                    EndTimeMapping="To"
+                    StartTimeMapping="From"
+                    SubjectMapping="EventName"
+                    NotesMapping="SubTitle"/>
+            </schedule:SfSchedule.AppointmentMapping>
+            <schedule:SfSchedule.TimelineViewSettings>
+                <schedule:TimelineViewSettings
+                    StartHour="08"
+                    EndHour="22">
+                    <schedule:TimelineViewSettings.LabelSettings>
+                        <schedule:TimelineLabelSettings TimeFormat="HH:mm"/>
+                    </schedule:TimelineViewSettings.LabelSettings>
+                </schedule:TimelineViewSettings>
+            </schedule:SfSchedule.TimelineViewSettings>
+        </schedule:SfSchedule>
+    </StackLayout>
+
+</ContentView>
