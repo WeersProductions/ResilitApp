@@ -74,7 +74,6 @@ namespace ResilITApp
 
         public SignInViewModel()
         {
-            
             SubmitCommand = new Command<string>(SubmitButtonClicked);
         }
 

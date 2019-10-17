@@ -28,6 +28,7 @@ namespace ResilITApp
             if(!Login.Instance.IsLoggedIn)
             {
                 list.Add("Login");
+                list.Add("Register");
             }
             list.Add("General");
             if(Login.Instance.IsLoggedIn)
@@ -114,6 +115,9 @@ namespace ResilITApp
                     listView.SelectedItem = null;
                     doToggleDrawer = false;
                 }
+            } else if(e.SelectedItem.ToString() == "Register")
+            {
+                appContent.Content = Activator.CreateInstance<RegisterPage>();
             } else
             {
                 // TODO: show favorites or general.

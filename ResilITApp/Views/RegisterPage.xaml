@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:resilitapp="clr-namespace:ResilITApp"
+             xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+             x:Class="ResilITApp.RegisterPage">
+    <ContentView.BindingContext>
+        <resilitapp:RegisterViewModel/>
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout Margin="20,0,20,20"
+                         Spacing="10">
+                <inputLayout:SfTextInputLayout
+                    Hint="Ticketcode"
+                    ContainerType="Outlined"
+                    ErrorText="Enter a valid ticketcode"
+                    HasError="{Binding TicketCodeError}">
+                    <Entry x:Name="InputTicketCode" Text="{Binding TicketCode}" Keyboard="Default" ReturnType="Next"/>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="First name"
+                    ContainerType="Outlined"
+                    ErrorText="Enter your first name"
+                    HasError="{Binding IsFirstNameEmpty}">
+                    <Entry x:Name="InputFirstName" Text="{Binding FirstName}" Keyboard="Default" ReturnType="Next"/>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="Surname"
+                    ContainerType="Outlined"
+                    ErrorText="Enter your surname"
+                    HasError="{Binding IsSurnameEmpty}">
+                    <Entry x:Name="InputSurname" Text="{Binding Surname}" Keyboard="Default" ReturnType="Next"/>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="Association"
+                    ContainerType="Outlined"
+                    ErrorText="Choose your association"
+                    HasError="{Binding AssociationError}">
+                    <combobox:SfComboBox x:Name="InputAssociation" IsEditableMode="false" SelectedItem="{Binding Association}" Watermark="Select..." DataSource="{Binding Associations}" DisplayMemberPath="name"/>
+                </inputLayout:SfTextInputLayout>
+                <syncfusion:SfCheckBox x:Name="InputBusses" IsChecked="{Binding UseBus}" Text="I would like to use the arranged bus at my study association"/>
+                <inputLayout:SfTextInputLayout
+                    Hint="Study programme"
+                    ContainerType="Outlined"
+                    ErrorText="Choose your study"
+                    HasError="{Binding StudyProgrammeError}">
+                    <combobox:SfComboBox x:Name="InputStudy" IsEditableMode="false" SelectedItem="{Binding StudyProgramme}" Watermark="Select...">
+                        <combobox:SfComboBox.ComboBoxSource>
+                            <ListCollection:List x:TypeArguments="x:String">
+                                <x:String>BSc Computer Science</x:String>
+                                <x:String>BSc Artifial Intelligence</x:String>
+                                <x:String>BSc Information Sciences</x:String>
+                                <x:String>BSc Mathematics</x:String>
+                                <x:String>Other</x:String>
+                            </ListCollection:List>
+                        </combobox:SfComboBox.ComboBoxSource>
+                    </combobox:SfComboBox>
+                </inputLayout:SfTextInputLayout>
+                <syncfusion:SfCheckBox x:Name="InputVegetarian" IsChecked="{Binding Vegetarian}" Text="I am a vegetarian"/>
+                <inputLayout:SfTextInputLayout
+                    Hint="Other remarks (e.g. veganism, allergies)"
+                    ContainerType="Outlined">
+                    <Entry x:Name="InputOtherRemarks" Text="{Binding OtherRemarks}" Keyboard="Text" ReturnType="Next"/>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="Email"
+                    ContainerType="Outlined"
+                    ErrorText="Enter a valid email address"
+                    HasError="{Binding MailHasError}">
+                    <Entry x:Name="InputEmail" Text="{Binding Mail}" Keyboard="Email" ReturnType="Next"/>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="Password"
+                    ContainerType="Outlined"
+                    EnablePasswordVisibilityToggle="True"
+                    HasError="{Binding IsPasswordEmpty}"
+                    ErrorText="Enter a password">
+                    <Entry x:Name="InputPassword" IsPassword="True" Text="{Binding Password}" ReturnType="Next"/>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="Confirm password"
+                    ContainerType="Outlined"
+                    EnablePasswordVisibilityToggle="True"
+                    HasError="{Binding ConfirmPasswordError}"
+                    ErrorText="Passwords do not match">
+                    <Entry x:Name="InputConfirmPassword" IsPassword="True" Text="{Binding ConfirmPassword}" ReturnType="Done" ReturnCommand="{Binding SubmitCommand}"/>
+                </inputLayout:SfTextInputLayout>
+
+                <StackLayout
+                             Spacing="10"
+                             Orientation="Horizontal">
+                    <syncfusion:SfButton Text="Privacy Policy"/>
+                    <syncfusion:SfButton Text="General Requirements"/>
+                </StackLayout>
+                
+                <syncfusion:SfCheckBox x:Name="InputAgreePolicy" IsChecked="{Binding AgreePolicy}" Text="I agree with the Privacy Policy and General Requirements"/>
+                <syncfusion:SfCheckBox x:Name="InputMailSubscribe" IsChecked="{Binding MailSubscribe}" Text="Subscribe for the mailinglist. We will mail you when you can enroll for sessions and last minute practical information. (You can deregister at any moment)"/>
+
+                <Button x:Name="submitButton"
+                        Command="{Binding SubmitCommand}"
+                        Text="Submit"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

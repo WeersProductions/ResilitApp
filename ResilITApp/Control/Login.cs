@@ -37,6 +37,7 @@ namespace ResilITApp
         public Login () {
             _observers = new List<IUserObserver>();
             var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.AllowAutoRedirect = true;
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
             _client = new HttpClient(httpClientHandler);
             _client.BaseAddress = new Uri(URL);
@@ -97,7 +98,7 @@ namespace ResilITApp
             User = null;
         }
 
-        public async System.Threading.Tasks.Task<bool> DoLoginAsync(SignInModel user)
+        public async Task<bool> DoLoginAsync(SignInModel user)
         {
             var formContent = new FormUrlEncodedContent(new[]
             {
@@ -107,6 +108,39 @@ namespace ResilITApp
             var request = await _client.PostAsync("login", formContent);
             string json = await request.Content.ReadAsStringAsync();
             if (json.Contains("/login"))
+            {
+                // We failed.
+                IsLoggedIn = false;
+                return false;
+            }
+
+            IsLoggedIn = true;
+            return true;
+        }
+
+        public async Task<bool> DoRegisterAsync(RegisterModel registerModel)
+        {
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("code", registerModel.code),
+                new KeyValuePair<string, string>("firstname", registerModel.firstname),
+                new KeyValuePair<string, string>("surname", registerModel.surname),
+                new KeyValuePair<string, string>("vereniging", registerModel.vereniging.ToString()),
+                new KeyValuePair<string, string>("bus", registerModel.bus.ToString()),
+                new KeyValuePair<string, string>("programme", registerModel.programme),
+                new KeyValuePair<string, string>("programmeOther", registerModel.programmeOther),
+                new KeyValuePair<string, string>("companyName", registerModel.companyName),
+                new KeyValuePair<string, string>("vegetarian", registerModel.vegetarian.ToString()),
+                new KeyValuePair<string, string>("specialNeeds", registerModel.specialNeeds),
+                new KeyValuePair<string, string>("email", registerModel.email),
+                new KeyValuePair<string, string>("password", registerModel.password),
+                new KeyValuePair<string, string>("confirm", registerModel.confirm),
+                new KeyValuePair<string, string>("privacyPolicyAgree", registerModel.privacyPolicyAgree.ToString()),
+                new KeyValuePair<string, string>("subscribe", registerModel.subscribe.ToString()),
+            });
+            var request = await _client.PostAsync("register", formContent);
+            string json = await request.Content.ReadAsStringAsync();
+            if (json.Contains("/register"))
             {
                 // We failed.
                 IsLoggedIn = false;
