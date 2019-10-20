@@ -30,11 +30,11 @@ namespace ResilITApp
                 list.Add("Login");
                 list.Add("Register");
             }
-            list.Add("General");
+            list.Add("Schedule");
             if(Login.Instance.IsLoggedIn)
             {
                 list.Add("Favorites");
-                list.Add("Logout");
+                //list.Add("Logout");
             }
 
             listView.ItemsSource = list;
