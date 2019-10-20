@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ResilITApp.Views.SpeakersPage"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:resilitapp="clr-namespace:ResilITApp.Model"
+    xmlns:syncfusion2="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+    <ContentView.BindingContext>
+        <resilitapp:SpeakerViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <syncfusion:SfListView x:Name="listView" ItemsSource="{Binding Speakers}" AutoFitMode="Height">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding name}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
+                        <Label Text="{Binding description}" TextColor="Teal" FontSize="15" />
+                        <syncfusion2:SfButton
+                            Text="Read more"
+                            WidthRequest="30"
+                            Command="{Binding Path=BindingContext.ReadMoreCommand, Source={x:Reference Name=listView}}"
+                            CommandParameter="{Binding .}"/>
+                        <BoxView 
+                        HeightRequest="1" 
+                        BackgroundColor="Black" 
+                        HorizontalOptions="Fill" />
+                    </StackLayout>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+    </ContentView.Content>
+</ContentView>

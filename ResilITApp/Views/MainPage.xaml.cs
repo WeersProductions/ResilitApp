@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ResilITApp.Control;
 using ResilITApp.Model;
+using ResilITApp.Views;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms;
@@ -36,6 +37,7 @@ namespace ResilITApp
                 list.Add("Favorites");
                 //list.Add("Logout");
             }
+            list.Add("Speakers");
 
             listView.ItemsSource = list;
         }
@@ -118,7 +120,11 @@ namespace ResilITApp
             } else if(e.SelectedItem.ToString() == "Register")
             {
                 appContent.Content = Activator.CreateInstance<RegisterPage>();
-            } else
+            } else if(e.SelectedItem.ToString() == "Speakers")
+            {
+                appContent.Content = Activator.CreateInstance<SpeakersPage>();
+            }
+            else
             {
                 // TODO: show favorites or general.
                 appContent.Content = Activator.CreateInstance<TimeTable>();

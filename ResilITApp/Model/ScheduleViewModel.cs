@@ -71,7 +71,7 @@ namespace ResilITApp
             var visibleDates = args.visibleDates;
         }
 
-        private async void ShowPopup(object appointment)
+        private async Task ShowPopup(object appointment)
         {
             await Navigation.PushPopupAsync(new SchedulePopup(appointment));
         }

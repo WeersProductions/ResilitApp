@@ -89,6 +89,9 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.3.0.14" />
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.3.0.14" />
     <PackageReference Include="Syncfusion.Xamarin.Expander " Version="17.2.0.39" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView">
+      <Version>17.3.0.17</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />

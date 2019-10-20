@@ -21,7 +21,7 @@ namespace ResilITApp
             
             InitializeComponent();
 
-            MainPage = new ResilITApp.MainPage();
+            MainPage = new MainPage();
             if (config == null)
             {
                 MainPage.DisplayAlert("Error", $"Could not find {ConfigFile}. Please report this bug.", "OK");

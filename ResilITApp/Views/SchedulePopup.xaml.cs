@@ -20,7 +20,7 @@ namespace ResilITApp
             EventName.Text = Appointment.EventName;
             EventDescription.Text = Appointment.SubTitle;
             EventTime.Text = Appointment.From.ToShortTimeString() + " - " + Appointment.To.ToShortTimeString();
-            SetChecked();
+            _ = SetChecked();
             iconButton.Clicked += OnFavorite;
         }
 
