@@ -73,7 +73,7 @@
                                      HeightRequest="40"
                                      CornerRadius="20"
                                      IsCheckable="true"
-                                     TextColor="Black"
+                                     TextColor="#333"
                                      BackgroundColor="Transparent"
                                      PressedBackgroundColor="Transparent">
                     <syncfusion:SfButton.FontFamily>

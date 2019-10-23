@@ -29,7 +29,7 @@ namespace ResilITApp
             }
         }
 
-        private const string URL = "https://www.resilit.snic.nl/";
+        public const string URL = "https://www.resilit.snic.nl/";
         private HttpClient _client;
 
         private List<IUserObserver> _observers;

@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Newtonsoft.Json;
 using ResilITApp.Control;
 using ResilITApp.Model;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ResilITApp
@@ -361,11 +362,26 @@ namespace ResilITApp
 
         public ICommand SubmitCommand { get; private set; }
 
+        public ICommand ShowPrivacy { get; set; }
+        public ICommand ShowRequirements { get; set; }
+
         public RegisterViewModel()
         {
             Associations = new ObservableCollection<AssociationModel>();
             _ = FillAssociations();
             SubmitCommand = new Command<string>(SubmitButtonClicked);
+            ShowPrivacy = new Command(ShowPrivacyClicked);
+            ShowRequirements = new Command(ShowRequirementsClicked);
+        }
+
+        private async void ShowPrivacyClicked()
+        {
+            await Launcher.OpenAsync(Login.URL + "Privacy_Policy.pdf");
+        }
+
+        private async void ShowRequirementsClicked()
+        {
+            await Launcher.OpenAsync(Login.URL + "Voorwaarden.pdf");
         }
 
         private async Task FillAssociations()

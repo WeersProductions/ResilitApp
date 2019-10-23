@@ -34,14 +34,13 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <StackLayout BackgroundColor="#1aa1d6"
+                    <StackLayout StyleClass="header"
                                  Orientation="Horizontal">
                         <Button x:Name="hamburgerButton"
                                 HeightRequest="50"
                                 WidthRequest="50"
                                 HorizontalOptions="Start"
                                 FontSize="20"
-                                BackgroundColor="#1aa1d6"
                                 Clicked="hamburgerButton_Clicked" />
                         <Label x:Name="headerLabel"
                                HeightRequest="50"
@@ -49,31 +48,25 @@
                                VerticalTextAlignment="Center"
                                Text="Home"
                                FontSize="16"
-                               TextColor="White"
-                               BackgroundColor="#1aa1d6" />
+                               TextColor="White"/>
                     </StackLayout>
                     <ContentView x:Name="appContent"
                                  Grid.Row="1" />
                 </Grid>
             </navigationdrawer:SfNavigationDrawer.ContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
-                <Grid BackgroundColor="#1aa1d6"
+                <Grid
+                    StyleClass="header"
                       Margin="5,5,5,5">
                     <Grid.BindingContext>
                         <viewModels:MainViewModel />
                     </Grid.BindingContext>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="80" />
                         <RowDefinition Height="30" />
                     </Grid.RowDefinitions>
-                    <Image Source="profile_picture.png"
-                           HeightRequest="80"
-                           Margin="0,10,0,0"
-                           BackgroundColor="#1aa1d6"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center" />
                     <Label Text="{Binding Fullname}"
-                           StyleClass="mainName" />
+                           StyleClass="mainName"
+                           Grid.Row="1"/>
                 </Grid>
             </navigationdrawer:SfNavigationDrawer.DrawerHeaderView>
             <navigationdrawer:SfNavigationDrawer.DrawerContentView>
@@ -94,7 +87,7 @@
             </navigationdrawer:SfNavigationDrawer.DrawerContentView>
             <navigationdrawer:SfNavigationDrawer.DrawerFooterView>
                 <StackLayout Orientation="Horizontal"
-                             BackgroundColor="#1aa1d6"
+                             StyleClass="header"
                              Padding="0,5,0,0">
                     <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
                            HeightRequest="40"
@@ -107,6 +100,7 @@
         </navigationdrawer:SfNavigationDrawer>
         <busyindicator:SfBusyIndicator
             x:Name="busyIndicator"
+            TextColor="#e36767"
             AnimationType="Ball"
             ViewBoxWidth="150"
             ViewBoxHeight="150"

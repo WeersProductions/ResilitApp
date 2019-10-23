@@ -38,6 +38,8 @@ using Syncfusion.XForms.iOS.TabView;
 using Syncfusion.XForms.iOS.Buttons;
 
 using Syncfusion.XForms.iOS.Accordion;
+using FFImageLoading.Forms.Platform;
+using System.Net;
 
 namespace ResilITApp.iOS
 {
@@ -54,8 +56,10 @@ namespace ResilITApp.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
+            ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
+
             Rg.Plugins.Popup.Popup.Init();
 
             global::Xamarin.Forms.Forms.Init();
@@ -115,10 +119,12 @@ namespace ResilITApp.iOS
 			
 			
 			SfAccordionRenderer.Init();
-			
-			LoadApplication(new App());
 
-            return base.FinishedLaunching(app, options);
+            CachedImageRenderer.Init();
+
+            LoadApplication(new App());
+
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }
 }

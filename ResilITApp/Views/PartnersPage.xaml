@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ResilITApp.Views.PartnersPage"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:resilitapp="clr-namespace:ResilITApp.Model"
+    xmlns:syncfusion2="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <ContentView.BindingContext>
+        <resilitapp:PartnersViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <syncfusion:SfListView x:Name="listView" ItemsSource="{Binding Partners}" AutoFitMode="Height" SelectionMode="None">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Frame x:Name="frame" HasShadow="True" Padding="2" Margin="2">
+                        <StackLayout>
+                            <Label Text="{Binding name}" StyleClass="speakerName"/> 
+                            <ffimageloading:CachedImage
+                                    HeightRequest="50"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    DownsampleToViewSize="true"
+                                    Source = "https://www.resilit.snic.nl/images/location/flint.jpg">
+                            </ffimageloading:CachedImage>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="50">
+                              <Image.Source>
+                                <UriImageSource Uri="https://i.stack.imgur.com/182Ig.jpg"
+                                  CacheValidity="1"
+                                  CachingEnabled="true"/>
+                              </Image.Source>                       
+                            </Image>
+                            <Label Text="{Binding fullImage}" /> 
+                            <Image x:Name="imageLogo" Source="{Binding fullImage}" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start"/>
+                            <Label Text="{Binding fullImage, StringFormat='My text: {0}'}" />
+                            <Label Text="{Binding description}" StyleClass="speakerDescription" />
+                            <Button
+                                Text="Read more"
+                                WidthRequest="14"
+                                HeightRequest="7"
+                                Command="{Binding Path=BindingContext.ReadMoreCommand, Source={x:Reference Name=listView}}"
+                                CommandParameter="{Binding .}"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+    </ContentView.Content>
+</ContentView>

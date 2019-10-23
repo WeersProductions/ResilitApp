@@ -38,13 +38,14 @@ namespace ResilITApp
                 //list.Add("Logout");
             }
             list.Add("Speakers");
+            list.Add("Partners");
 
             listView.ItemsSource = list;
         }
 
         private void InitalizeHamburger()
         {
-            hamburgerButton.BackgroundColor = Color.FromHex("#00a0e1");
+            hamburgerButton.BackgroundColor = Color.FromHex("#333");
 
             hamburgerButton.HeightRequest = 40;
             hamburgerButton.WidthRequest = 40;
@@ -123,6 +124,9 @@ namespace ResilITApp
             } else if(e.SelectedItem.ToString() == "Speakers")
             {
                 appContent.Content = Activator.CreateInstance<SpeakersPage>();
+            } else if(e.SelectedItem.ToString() == "Partners")
+            {
+                appContent.Content = Activator.CreateInstance<PartnersPage>();
             }
             else
             {

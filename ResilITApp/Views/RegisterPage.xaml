@@ -94,8 +94,8 @@
                 <StackLayout
                              Spacing="10"
                              Orientation="Horizontal">
-                    <syncfusion:SfButton Text="Privacy Policy"/>
-                    <syncfusion:SfButton Text="General Requirements"/>
+                    <syncfusion:SfButton Text="Privacy Policy" Command="{Binding ShowPrivacy}"/>
+                    <syncfusion:SfButton Text="General Requirements" Command="{Binding ShowRequirements}"/>
                 </StackLayout>
                 
                 <syncfusion:SfCheckBox x:Name="InputAgreePolicy" IsChecked="{Binding AgreePolicy}" Text="I agree with the Privacy Policy and General Requirements"/>

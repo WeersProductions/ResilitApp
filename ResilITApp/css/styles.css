@@ -1,6 +1,10 @@
 ﻿body {
 }
 
+.header {
+    background-color: #333333;
+}
+
 label {
     font-size: 14;
 }
@@ -24,4 +28,20 @@ label {
 .mainName {
     font-size: 20;
     color: white;
+    margin-left: 5;
+}
+
+.speakerName {
+    color: gray;
+    font-size: 21;
+    font-style: bold;
+}
+
+.speakerDescription {
+    color: gray;
+    font-size: 15;
+}
+
+.button {
+    background-color: gray;
 }

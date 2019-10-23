@@ -9,9 +9,9 @@
         Margin="10, 10, 10, 10"
         Padding="10, 10, 10, 10"
         BackgroundColor="white">
-        <Label Text="{Binding name}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
+        <Label Text="{Binding name}" StyleClass="speakerName"/>
         <ScrollView>
-            <Label Text="{Binding fullDescription}" TextColor="Teal" FontSize="15" />
+            <Label Text="{Binding fullDescription}" StyleClass="speakerDescription"/>
         </ScrollView>
     </StackLayout>
 </pages:PopupPage>
