@@ -28,6 +28,7 @@ namespace ResilITApp
 
         public void ShowSchedule()
         {
+            headerLabel.Text = "Schedule";
             appContent.Content = Activator.CreateInstance<TimeTable>();
         }
 
