@@ -31,6 +31,11 @@ namespace ResilITApp
 
         private async void OnFavorite(object sender, EventArgs args)
         {
+            if(!Login.Instance.IsLoggedIn)
+            {
+                await Application.Current.MainPage.DisplayAlert("Please login!", "Login to make use of favorites.", "OK");
+                return;
+            }
             if(iconButton.IsChecked)
             {
                 await Favorites.AddFavorite(Appointment);

@@ -52,7 +52,7 @@ namespace ResilITApp
         {
             if(args.Appointment != null)
             {
-                ShowPopup(args.Appointment);
+                _ = ShowPopup(args.Appointment);
             }
         }
 

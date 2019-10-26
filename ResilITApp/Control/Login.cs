@@ -60,7 +60,7 @@ namespace ResilITApp
                 isLoggedIn = value;
                 if(isLoggedIn)
                 {
-                    GetUser();
+                     _ = GetUser();
                 }
             }
         }

@@ -14,12 +14,21 @@ namespace ResilITApp
 {
     public partial class MainPage : ContentPage
     {
+        private static MainPage instance;
+        public static MainPage Instance { get { return instance; } }
+
         public MainPage()
         {
+            instance = this;
             InitializeComponent();
 
             InitalizeHamburger();
             InitializeMenuItems();
+        }
+
+        public void ShowSchedule()
+        {
+            appContent.Content = Activator.CreateInstance<TimeTable>();
         }
 
         private void InitializeMenuItems()

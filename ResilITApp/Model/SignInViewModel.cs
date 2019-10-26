@@ -99,6 +99,7 @@ namespace ResilITApp
                 if (httpMessage.Success)
                 {
                     await Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
+                    MainPage.Instance.ShowSchedule();
                 }
                 else
                 {
