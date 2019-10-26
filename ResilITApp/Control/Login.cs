@@ -102,13 +102,14 @@ namespace ResilITApp
             User = null;
         }
 
-        public async Task<bool> DoLoginAsync(SignInModel user)
+        public async Task<HttpMessage> DoLoginAsync(SignInModel user)
         {
             var formContent = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("email", user.email),
                 new KeyValuePair<string, string>("password", user.password),
             });
+            HttpMessage result = new HttpMessage();
             try
             {
                 var request = await _client.PostAsync("login", formContent);
@@ -117,21 +118,25 @@ namespace ResilITApp
                 {
                     // We failed.
                     IsLoggedIn = false;
+                    result.Success = false;
+                    result.Message = "Incorrect username or password.";
                 }
                 else
                 {
                     IsLoggedIn = true;
+                    result.Success = true;
                 }
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 IsLoggedIn = false;
+                result.Message = "No connection.";
             }
             
-            return IsLoggedIn;
+            return result;
         }
 
-        public async Task<bool> DoRegisterAsync(RegisterModel registerModel)
+        public async Task<HttpMessage> DoRegisterAsync(RegisterModel registerModel)
         {
             var formContent = new FormUrlEncodedContent(new[]
             {
@@ -151,6 +156,7 @@ namespace ResilITApp
                 new KeyValuePair<string, string>("privacyPolicyAgree", registerModel.privacyPolicyAgree.ToString()),
                 new KeyValuePair<string, string>("subscribe", registerModel.subscribe.ToString()),
             });
+            HttpMessage result = new HttpMessage();
             try
             {
                 var request = await _client.PostAsync("register", formContent);
@@ -159,17 +165,21 @@ namespace ResilITApp
                 {
                     // We failed.
                     IsLoggedIn = false;
+                    result.Success = false;
+                    result.Message = "Incorrect ticketcode.";
                 }
                 else
                 {
-                    isLoggedIn = true;
+                    IsLoggedIn = true;
+                    result.Success = true;
                 }
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 IsLoggedIn = false;
+                result.Message = "No connection.";
             }
-            return IsLoggedIn;
+            return result;
         }
 
         public async Task<bool> GetUser(bool forceRefresh = false)

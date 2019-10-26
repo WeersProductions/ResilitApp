@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using ResilITApp.Control;
+using ResilITApp.Model;
 using Xamarin.Forms;
 
 namespace ResilITApp
@@ -93,16 +94,15 @@ namespace ResilITApp
             }
             else if (!isPasswordEmpty)
             {
-                // TODO: check for connection instead of crash
-                bool success = await Login.Instance.DoLoginAsync(new Model.SignInModel { email = Mail, password = Password });
+                HttpMessage httpMessage = await Login.Instance.DoLoginAsync(new Model.SignInModel { email = Mail, password = Password });
                 AppController.RemoveBusy(this);
-                if (success)
+                if (httpMessage.Success)
                 {
                     await Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Failed", "Incorrect username or password.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Failed", httpMessage.Message, "OK");
                 }
             }
             AppController.RemoveBusy(this);

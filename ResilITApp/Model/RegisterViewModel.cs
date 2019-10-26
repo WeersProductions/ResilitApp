@@ -447,7 +447,7 @@ namespace ResilITApp
             {
                 // TODO: set TicketCodeError to false if it doesn't work and we get a false.
                 // TODO: check for connection instead of crash
-                bool success = await Login.Instance.DoRegisterAsync(new Model.RegisterModel {
+                HttpMessage httpMessage = await Login.Instance.DoRegisterAsync(new Model.RegisterModel {
                     code=TicketCode,
                     firstname=FirstName,
                     surname=Surname,
@@ -464,13 +464,13 @@ namespace ResilITApp
                     privacyPolicyAgree=AgreePolicy,
                     subscribe=MailSubscribe});
                 AppController.RemoveBusy(this);
-                if (success)
+                if (httpMessage.Success)
                 {
                     await Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Failed", "Incorrect username or password.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Failed", httpMessage.Message, "OK");
                 }
             }
             AppController.RemoveBusy(this);
