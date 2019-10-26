@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ResilITApp.Control;
@@ -34,8 +35,11 @@ namespace ResilITApp
 
         private List<IUserObserver> _observers;
 
+        private List<CancellationTokenSource> _cancellationTokenSources;
+
         public Login () {
             _observers = new List<IUserObserver>();
+            _cancellationTokenSources = new List<CancellationTokenSource>();
             var httpClientHandler = new HttpClientHandler();
             httpClientHandler.AllowAutoRedirect = true;
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
@@ -105,17 +109,26 @@ namespace ResilITApp
                 new KeyValuePair<string, string>("email", user.email),
                 new KeyValuePair<string, string>("password", user.password),
             });
-            var request = await _client.PostAsync("login", formContent);
-            string json = await request.Content.ReadAsStringAsync();
-            if (json.Contains("/login"))
+            try
             {
-                // We failed.
-                IsLoggedIn = false;
-                return false;
+                var request = await _client.PostAsync("login", formContent);
+                string json = await request.Content.ReadAsStringAsync();
+                if (json.Contains("/login"))
+                {
+                    // We failed.
+                    IsLoggedIn = false;
+                }
+                else
+                {
+                    IsLoggedIn = true;
+                }
             }
-
-            IsLoggedIn = true;
-            return true;
+            catch (HttpRequestException e)
+            {
+                IsLoggedIn = false;
+            }
+            
+            return IsLoggedIn;
         }
 
         public async Task<bool> DoRegisterAsync(RegisterModel registerModel)
@@ -138,17 +151,25 @@ namespace ResilITApp
                 new KeyValuePair<string, string>("privacyPolicyAgree", registerModel.privacyPolicyAgree.ToString()),
                 new KeyValuePair<string, string>("subscribe", registerModel.subscribe.ToString()),
             });
-            var request = await _client.PostAsync("register", formContent);
-            string json = await request.Content.ReadAsStringAsync();
-            if (json.Contains("/register"))
+            try
             {
-                // We failed.
-                IsLoggedIn = false;
-                return false;
+                var request = await _client.PostAsync("register", formContent);
+                string json = await request.Content.ReadAsStringAsync();
+                if (json.Contains("/register"))
+                {
+                    // We failed.
+                    IsLoggedIn = false;
+                }
+                else
+                {
+                    isLoggedIn = true;
+                }
             }
-
-            IsLoggedIn = true;
-            return true;
+            catch (HttpRequestException e)
+            {
+                IsLoggedIn = false;
+            }
+            return IsLoggedIn;
         }
 
         public async Task<bool> GetUser(bool forceRefresh = false)
@@ -187,7 +208,25 @@ namespace ResilITApp
             }
         }
 
-        public async Task<HttpMessage> DoGet(string url)
+        private void CancelTasks()
+        {
+            foreach(var token in _cancellationTokenSources)
+            {
+                if(token != null)
+                {
+                    token.Cancel();
+                }
+            }
+        }
+
+        private CancellationTokenSource AddCancellableTask()
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+            _cancellationTokenSources.Add(cts);
+            return cts;
+        }
+
+        public async Task<HttpMessage> DoGet(string url, bool cancellable = true)
         {
             if (url.StartsWith("/", StringComparison.Ordinal))
             {
@@ -195,16 +234,27 @@ namespace ResilITApp
             }
 
             HttpMessage result = new HttpMessage();
-            var request = await _client.GetAsync(url);
-
-            result.Success = request.IsSuccessStatusCode;
-            if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
+            try
             {
-                // we're not logged in. The user should log in again.
-                result.Message = "Not logged in.";
-                result.Success = false;
+                var request = cancellable ? await _client.GetAsync(url, AddCancellableTask().Token) : await _client.GetAsync(url);
+
+                result.Success = request.IsSuccessStatusCode;
+                if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
+                {
+                    // we're not logged in. The user should log in again.
+                    result.Message = "Not logged in.";
+                    result.Success = false;
+                }
+                result.Response = request;
             }
-            result.Response = request;
+            catch (OperationCanceledException)
+            {
+                result.Message = "Cancelled request";
+            }
+            catch (HttpRequestException e)
+            {
+                result.Message = e.Message;
+            }
             return result;
         }
 
@@ -216,17 +266,25 @@ namespace ResilITApp
             }
 
             HttpMessage result = new HttpMessage();
-            var request = await _client.PostAsync(url, new StringContent(""));
-
-            result.Success = request.IsSuccessStatusCode;
-            if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
+            try
             {
-                // we're not logged in. The user should log in again.
-                result.Message = "Not logged in.";
-                result.Success = false;
+                var request = await _client.PostAsync(url, new StringContent(""));
+
+                result.Success = request.IsSuccessStatusCode;
+                if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
+                {
+                    // we're not logged in. The user should log in again.
+                    result.Message = "Not logged in.";
+                    result.Success = false;
+                }
+                result.Response = request;
             }
-            result.Response = request;
+            catch (HttpRequestException e)
+            {
+                result.Message = e.Message;
+            }
             return result;
+
         }
     }
 }

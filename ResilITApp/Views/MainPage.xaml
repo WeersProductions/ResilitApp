@@ -105,7 +105,9 @@
             ViewBoxWidth="150"
             ViewBoxHeight="150"
             EnableAnimation="True"
-            IsBusy="{Binding IsBussy}">
+            IsBusy="{Binding IsBussy}"
+            IsVisible="{Binding IsBussy}"
+            BackgroundColor="Transparent">
             <busyindicator:SfBusyIndicator.BindingContext>
                 <viewModels:AppModel/>
             </busyindicator:SfBusyIndicator.BindingContext>
