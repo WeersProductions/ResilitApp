@@ -22,7 +22,7 @@ namespace ResilITApp.Control
         public async static Task<int[]> GetFavorites()
         {
             UserModel user = await Login.Instance.GiveUser(true);
-            return user.favorites;
+            return user != null ? user.favorites : new int[] { };
         }
 
         public async static Task<bool> IsFavorite(Talk talk)

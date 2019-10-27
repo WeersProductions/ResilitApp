@@ -14,11 +14,13 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Syncfusion.XForms.Buttons;
+using ResilITApp.Control;
 
 namespace ResilITApp
 {
     public class ScheduleViewModel : INotifyPropertyChanged
     {
+        public static bool ShowFavoritesOnly;
         private const string TalksFile = "timetable.json";
 
         private ObservableCollection<Talk> talks;
@@ -138,32 +140,43 @@ namespace ResilITApp
         /// Get the raw json talk objects.
         /// </summary>
         /// <returns></returns>
-        private List<JSONTalk> GetJSONTalks()
+        private async Task<List<JSONTalk>> GetJSONTalks()
         {
             var assembly = typeof(MainPage).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream($"{ assembly.GetName().Name}.{ TalksFile}");
             using (var reader = new StreamReader(stream))
             {
                 var json = reader.ReadToEnd();
-                return FromJSON(json);
+                return await FromJSON(json);
             }
         }
 
         private async Task<List<JSONTalk>> GetJSONTalksFromWeb()
         {
             string json = await GetSchedule.GetScheduleJSON();
-            return FromJSON(json);
+            return await FromJSON(json);
         }
 
-        private List<JSONTalk> FromJSON(string json)
+        private async Task<List<JSONTalk>> FromJSON(string json)
         {
             JSONTimetable jsonResult = JsonConvert.DeserializeObject<JSONTimetable>(json);
             List<JSONTalk> result = new List<JSONTalk>();
             int index = 0;
+            if(ShowFavoritesOnly && Login.Instance.User == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Failed", "You are not logged in. First login.", "OK");
+                return result;
+            }
+            var favorites = ShowFavoritesOnly ? await Favorites.GetFavorites() : new int[] { };
+
             foreach (JSONTrack jsonTrack in jsonResult.tracks)
             {
                 foreach (JSONTalk jsonTalk in jsonTrack.talks)
                 {
+                    if(ShowFavoritesOnly && !favorites.Contains(jsonTalk.id))
+                    {
+                        continue;
+                    }
                     jsonTalk.color = ScheduleColors[index];
                     result.Add(jsonTalk);
                 }

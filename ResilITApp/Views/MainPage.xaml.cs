@@ -138,9 +138,14 @@ namespace ResilITApp
             {
                 appContent.Content = Activator.CreateInstance<PartnersPage>();
             }
+            else if(e.SelectedItem.ToString() == "Favorites")
+            {
+                ScheduleViewModel.ShowFavoritesOnly = true;
+                appContent.Content = Activator.CreateInstance<TimeTable>();
+            }
             else
             {
-                // TODO: show favorites or general.
+                ScheduleViewModel.ShowFavoritesOnly = false;
                 appContent.Content = Activator.CreateInstance<TimeTable>();
             }
 
