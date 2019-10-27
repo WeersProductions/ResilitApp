@@ -5,6 +5,10 @@ using System.Windows.Input;
 using ResilITApp.Control;
 using ResilITApp.Model;
 using Xamarin.Forms;
+using Xamarin.Auth;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace ResilITApp
 {
@@ -78,6 +82,16 @@ namespace ResilITApp
             SubmitCommand = new Command<string>(SubmitButtonClicked);
         }
 
+        public static async Task LoadAuth()
+        {
+            List<Account> accounts = await SecureStorageAccountStore.FindAccountsForServiceAsync(App.AppName);
+            var account = accounts.FirstOrDefault();
+            if (account != null)
+            {
+                await DoLogin(account.Username, account.Properties["Password"], false);
+            }
+        }
+
         private void NotifyPropertyChanged([CallerMemberName] string propertyName="")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -85,7 +99,7 @@ namespace ResilITApp
 
         private async void SubmitButtonClicked(object obj)
         {
-            AppController.AddBusy(this);
+            AppController.AddBusy("SignInViewModel");
             IsPasswordEmpty = string.IsNullOrEmpty(Password);
 
             if(string.IsNullOrEmpty(Mail) || !mail.Contains("@") || !mail.Contains("."))
@@ -94,19 +108,46 @@ namespace ResilITApp
             }
             else if (!isPasswordEmpty)
             {
-                HttpMessage httpMessage = await Login.Instance.DoLoginAsync(new Model.SignInModel { email = Mail, password = Password });
-                AppController.RemoveBusy(this);
-                if (httpMessage.Success)
+                if(await DoLogin(Mail, Password, true))
+                {
+                    // Save this.
+                    Account account = new Account
+                    {
+                        Username = Mail
+                    };
+                    account.Properties.Add("Password", Password);
+                    await SecureStorageAccountStore.SaveAsync(account, App.AppName);
+                }
+            }
+            AppController.RemoveBusy("SignInViewModel");
+        }
+
+        private static async Task<bool> DoLogin(string emailInput, string passwordInput, bool showPopup)
+        {
+            if(string.IsNullOrEmpty(emailInput) || string.IsNullOrEmpty(passwordInput))
+            {
+                return false;
+            }
+
+            HttpMessage httpMessage = await Login.Instance.DoLoginAsync(new SignInModel { email = emailInput, password = passwordInput });
+            AppController.RemoveBusy("SignInViewModel");
+            if (httpMessage.Success)
+            {
+                if(showPopup)
                 {
                     await Application.Current.MainPage.DisplayAlert("Success", "You are logged in.", "OK");
-                    MainPage.Instance.ShowSchedule();
                 }
-                else
+                MainPage.Instance.ShowSchedule();
+                return true;
+            }
+            else
+            {
+                if(showPopup)
                 {
                     await Application.Current.MainPage.DisplayAlert("Failed", httpMessage.Message, "OK");
                 }
+                return false;
             }
-            AppController.RemoveBusy(this);
         }
     }
 }

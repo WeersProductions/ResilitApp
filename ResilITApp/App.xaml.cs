@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ResilITApp.Control;
 using Xamarin.Forms;
 
 namespace ResilITApp
 {
     public partial class App : Application
     {
+        public static string AppName { get
+            {
+                return "SNiCApp";
+            }
+        }
+
         private const string ConfigFile = "config.json";
         public App()
         {
@@ -26,6 +34,8 @@ namespace ResilITApp
             {
                 MainPage.DisplayAlert("Error", $"Could not find {ConfigFile}. Please report this bug.", "OK");
             }
+
+            _ = SignInViewModel.LoadAuth();
         }
 
         /// <summary>
