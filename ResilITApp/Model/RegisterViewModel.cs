@@ -141,6 +141,7 @@ namespace ResilITApp
             {
                 association = value;
                 AssociationError = false;
+                ShowCompany = string.Equals(value.name, "Partner");
                 NotifyPropertyChanged();
             }
         }
@@ -184,6 +185,7 @@ namespace ResilITApp
             {
                 studyProgramme = value;
                 StudyProgrammeError = false;
+                ShowOtherProgramme = string.Equals(value, "Other");
                 NotifyPropertyChanged();
             }
         }
@@ -198,6 +200,35 @@ namespace ResilITApp
             set
             {
                 studyProgrammeOther = value;
+                StudyProgrammeOtherError = false;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool studyProgrammeOtherError;
+        public bool StudyProgrammeOtherError
+        {
+            get
+            {
+                return studyProgrammeOtherError;
+            }
+            set
+            {
+                studyProgrammeOtherError = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool showOtherProgramme;
+        public bool ShowOtherProgramme
+        {
+            get
+            {
+                return showOtherProgramme;
+            }
+            set
+            {
+                showOtherProgramme = value;
                 NotifyPropertyChanged();
             }
         }
@@ -212,7 +243,45 @@ namespace ResilITApp
             set
             {
                 companyName = value;
+                CompanyNameError = false;
                 NotifyPropertyChanged();
+            }
+        }
+
+        private bool companyNameError;
+        public bool CompanyNameError
+        {
+            get
+            {
+                return companyNameError;
+            }
+            set
+            {
+                companyNameError = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool showCompany;
+        public bool ShowCompany
+        {
+            get
+            {
+                return showCompany;
+            }
+            set
+            {
+                showCompany = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged("ShowStudy");
+            }
+        }
+
+        public bool ShowStudy
+        {
+            get
+            {
+                return !ShowCompany;
             }
         }
 
@@ -422,8 +491,10 @@ namespace ResilITApp
             IsFirstNameEmpty = string.IsNullOrEmpty(FirstName);
             IsSurnameEmpty = string.IsNullOrEmpty(Surname);
             AssociationError = Association != null && string.IsNullOrEmpty(Association.name);
-            StudyProgrammeError = string.IsNullOrEmpty(StudyProgramme);
+            StudyProgrammeError = !ShowCompany && string.IsNullOrEmpty(StudyProgramme);
             TicketCodeError = string.IsNullOrEmpty(TicketCode);
+            StudyProgrammeOtherError = ShowOtherProgramme && string.IsNullOrEmpty(studyProgrammeOther);
+            CompanyNameError = ShowCompany && string.IsNullOrEmpty(CompanyName);
             int associationIndex = -1;
 
             if(!AssociationError)
@@ -443,10 +514,9 @@ namespace ResilITApp
             }
             
 
-            if (!isPasswordEmpty && !MailHasError && !ConfirmPasswordError && !IsFirstNameEmpty && !IsSurnameEmpty && !AssociationError && !StudyProgrammeError && !TicketCodeError)
+            if (!isPasswordEmpty && !MailHasError && !ConfirmPasswordError && !IsFirstNameEmpty && !IsSurnameEmpty && !AssociationError && !StudyProgrammeError && !TicketCodeError && !StudyProgrammeOtherError && !CompanyNameError)
             {
                 // TODO: set TicketCodeError to false if it doesn't work and we get a false.
-                // TODO: check for connection instead of crash
                 HttpMessage httpMessage = await Login.Instance.DoRegisterAsync(new Model.RegisterModel {
                     code=TicketCode,
                     firstname=FirstName,

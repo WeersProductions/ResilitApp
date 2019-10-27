@@ -48,7 +48,8 @@
                     Hint="Study programme"
                     ContainerType="Outlined"
                     ErrorText="Choose your study"
-                    HasError="{Binding StudyProgrammeError}">
+                    HasError="{Binding StudyProgrammeError}"
+                    IsVisible="{Binding ShowStudy}">
                     <combobox:SfComboBox x:Name="InputStudy" IsEditableMode="false" SelectedItem="{Binding StudyProgramme}" Watermark="Select...">
                         <combobox:SfComboBox.ComboBoxSource>
                             <ListCollection:List x:TypeArguments="x:String">
@@ -60,6 +61,22 @@
                             </ListCollection:List>
                         </combobox:SfComboBox.ComboBoxSource>
                     </combobox:SfComboBox>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="Company name"
+                    ContainerType="Outlined"
+                    ErrorText="Enter the name of your company"
+                    HasError="{Binding CompanyNameError}"
+                    IsVisible="{Binding ShowCompany}">
+                    <Entry x:Name="InputCompany" Text="{Binding CompanyName}" Keyboard="Default" ReturnType="Next"/>
+                </inputLayout:SfTextInputLayout>
+                <inputLayout:SfTextInputLayout
+                    Hint="Please enter the name of your study programme"
+                    ContainerType="Outlined"
+                    ErrorText="Enter the name of your study programme"
+                    HasError="{Binding StudyProgrammeOtherError}"
+                    IsVisible="{Binding ShowOtherProgramme}">
+                    <Entry x:Name="InputStudyOther" Text="{Binding StudyProgrammeOther}" Keyboard="Default" ReturnType="Next"/>
                 </inputLayout:SfTextInputLayout>
                 <syncfusion:SfCheckBox x:Name="InputVegetarian" IsChecked="{Binding Vegetarian}" Text="I am a vegetarian"/>
                 <inputLayout:SfTextInputLayout

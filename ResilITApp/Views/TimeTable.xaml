@@ -27,8 +27,8 @@
             <local:ScheduleViewModel/>
         </StackLayout.BindingContext>
         <!--Menu bar-->
-        <StackLayout Orientation="Horizontal">
-            <Label Margin="5,0,0,0" Text="Vertical" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+            <Label StyleClass="switch" Text="Vertical schedule view" HorizontalOptions="Start" VerticalOptions="Center"/>
             <button:SfSwitch x:Name="SwitchView" MinimumHeightRequest="10" HorizontalOptions="FillAndExpand" IsOn="{Binding ScheduleSwitchChecked}"/>
         </StackLayout>
         <!--Content-->
@@ -55,7 +55,9 @@
             <schedule:SfSchedule.DayViewSettings>
                 <schedule:DayViewSettings
                     StartHour="08"
-                    EndHour="22">
+                    EndHour="22"
+                    WorkStartHour="08"
+                    WorkEndHour="22">
                     <schedule:DayViewSettings.DayLabelSettings>
                         <schedule:DayLabelSettings TimeFormat="HH:mm"/>
                     </schedule:DayViewSettings.DayLabelSettings>

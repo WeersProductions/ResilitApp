@@ -45,3 +45,8 @@ label {
 .button {
     background-color: gray;
 }
+
+.switch {
+    margin-left: 10;
+    font-size: 16;
+}
