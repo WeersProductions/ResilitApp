@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ResilITApp.Model
 {
@@ -46,5 +48,16 @@ namespace ResilITApp.Model
         public bool presenter { get; set; }
         public string description { get; set; }
         public string fullDescription { get; set; }
+
+        public ICommand closeCommand { get; set; }
+        public JSONSpeakerInfoModel()
+        {
+            closeCommand = new Command(ClosePopup);
+        }
+
+        private async void ClosePopup()
+        {
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
+        }
     }
 }

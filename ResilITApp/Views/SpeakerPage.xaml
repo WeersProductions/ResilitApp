@@ -13,5 +13,6 @@
         <ScrollView>
             <Label Text="{Binding fullDescription}" StyleClass="speakerDescription"/>
         </ScrollView>
+        <Button Margin="10" Command="{Binding closeCommand}" Text="Close"/>
     </StackLayout>
 </pages:PopupPage>

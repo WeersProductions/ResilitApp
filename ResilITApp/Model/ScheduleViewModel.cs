@@ -177,7 +177,8 @@ namespace ResilITApp
 
         private async Task ShowPopup(object appointment)
         {
-            await Application.Current.MainPage.Navigation.PushPopupAsync(new SchedulePopup(appointment));
+            //await Application.Current.MainPage.Navigation.PushPopupAsync(new SchedulePopup(appointment));
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new SchedulePopup(appointment));
         }
 
         /// <summary>

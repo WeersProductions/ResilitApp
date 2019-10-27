@@ -38,7 +38,7 @@ namespace ResilITApp
             if(!enrolled.success)
             {
                 await Application.Current.MainPage.DisplayAlert("Failed", "Could not get your talk information.", "OK");
-                await Navigation.PopAsync();
+                await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAsync();
                 return;
             }
             _enrolled = enrolled.enrolled;

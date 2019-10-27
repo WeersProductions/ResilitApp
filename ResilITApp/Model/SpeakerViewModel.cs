@@ -42,7 +42,8 @@ namespace ResilITApp.Model
 
         private async void NavigateToReadMoreContent(object obj)
         {
-            await Navigation.PushPopupAsync(new SpeakerPage() { BindingContext = obj });
+            //await Navigation.PushPopupAsync(new SpeakerPage() { BindingContext = obj });
+            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(new SpeakerPage() { BindingContext = obj });
         }
 
         internal void AddSpeakersFromIds(List<string> ids)
