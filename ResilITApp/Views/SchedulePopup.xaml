@@ -105,5 +105,6 @@
                 </syncfusion:SfButton>
             </StackLayout>
         </FlexLayout>
+        <Button x:Name="EnrollButton"></Button>
     </StackLayout>
 </pages:PopupPage>
