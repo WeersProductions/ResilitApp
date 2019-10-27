@@ -23,12 +23,17 @@
              x:Class="ResilITApp.TimeTable">
 
     <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout.BindingContext>
+            <local:ScheduleViewModel/>
+        </StackLayout.BindingContext>
         <!--Menu bar-->
-        
-
+        <StackLayout Orientation="Horizontal">
+            <Label Margin="5,0,0,0" Text="Vertical" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <button:SfSwitch x:Name="SwitchView" MinimumHeightRequest="10" HorizontalOptions="FillAndExpand" IsOn="{Binding ScheduleSwitchChecked}"/>
+        </StackLayout>
         <!--Content-->
         <schedule:SfSchedule VerticalOptions="FillAndExpand"
-                             ScheduleView ="TimelineView"
+                             ScheduleView ="{Binding ScheduleType}"
                              TimeInterval="15"
                              TimeIntervalHeight="180"
                              MoveToDate="2019-11-26"
@@ -39,9 +44,6 @@
 	                         CellLongPressedCommand="{Binding ScheduleCellLongPressed}"
 	                         VisibleDatesChangedCommand="{Binding ScheduleVisibleDatesChanged}"
                              DataSource="{Binding Talks}">
-            <schedule:SfSchedule.BindingContext>
-                <local:ScheduleViewModel/>
-            </schedule:SfSchedule.BindingContext>
             <schedule:SfSchedule.AppointmentMapping>
                 <schedule:ScheduleAppointmentMapping
                     ColorMapping="Color"
@@ -50,6 +52,15 @@
                     SubjectMapping="EventName"
                     NotesMapping="SubTitle"/>
             </schedule:SfSchedule.AppointmentMapping>
+            <schedule:SfSchedule.DayViewSettings>
+                <schedule:DayViewSettings
+                    StartHour="08"
+                    EndHour="22">
+                    <schedule:DayViewSettings.DayLabelSettings>
+                        <schedule:DayLabelSettings TimeFormat="HH:mm"/>
+                    </schedule:DayViewSettings.DayLabelSettings>
+                </schedule:DayViewSettings>
+            </schedule:SfSchedule.DayViewSettings>
             <schedule:SfSchedule.TimelineViewSettings>
                 <schedule:TimelineViewSettings
                     StartHour="08"

@@ -10,6 +10,9 @@ namespace ResilITApp
         public TimeTable()
         {
             InitializeComponent();
+
+            var bindable = (ScheduleViewModel)SwitchView.BindingContext;
+            SwitchView.StateChanged += bindable.ChangeSchedule;
         }
     }
 }
