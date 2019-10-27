@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Syncfusion.XForms.Buttons;
 using ResilITApp.Control;
+using ResilITApp.Model;
 
 namespace ResilITApp
 {
@@ -22,6 +23,20 @@ namespace ResilITApp
     {
         public static bool ShowFavoritesOnly;
         private const string TalksFile = "timetable.json";
+
+        private bool canEnroll;
+        public bool CanEnroll
+        {
+            get
+            {
+                return canEnroll;
+            }
+            set
+            {
+                canEnroll = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private ObservableCollection<Talk> talks;
         public ObservableCollection<Talk> Talks
@@ -75,6 +90,8 @@ namespace ResilITApp
         public ICommand ScheduleCellLongPressed { get; set; }
         public ICommand ScheduleVisibleDatesChanged { get; set; }
 
+        public ICommand EnrollFavorites { get; set; }
+
 
         public ScheduleViewModel()
         {
@@ -93,6 +110,33 @@ namespace ResilITApp
             ScheduleCellDoubleTapped = new Command<CellTappedEventArgs>(DoubleTapped);
             ScheduleCellLongPressed = new Command<CellTappedEventArgs>(LongPressed);
             ScheduleVisibleDatesChanged = new Command<VisibleDatesChangedEventArgs>(VisibleDatesChanged);
+            EnrollFavorites = new Command(EnrollToFavorites);
+            _ = Init();
+        }
+
+        private async void EnrollToFavorites()
+        {
+            JSONEnrollFavorites result = await Enroll.EnrollFavorites();
+            if(!result.success)
+            {
+                if(result.errors > 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Failed", $"Could not enroll to all of your favorites. Enrolled to {result.amountOfFavorites - result.errors} talks and failed for {result.errors} talks. Did you already enroll to some talks?", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Failed", "Could not enroll to your favorites... Try again later.", "OK");
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Success!", "Enrolled for your favorite talks.", "OK");
+            }
+        }
+
+        private async Task Init()
+        {
+            CanEnroll = await Enroll.CanEnroll();
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

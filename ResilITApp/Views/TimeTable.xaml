@@ -21,18 +21,23 @@
 			xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
 			xmlns:accordion="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
              x:Class="ResilITApp.TimeTable">
-
-    <StackLayout VerticalOptions="FillAndExpand">
+    <ScrollView>
+    <StackLayout>
         <StackLayout.BindingContext>
             <local:ScheduleViewModel/>
         </StackLayout.BindingContext>
         <!--Menu bar-->
+        <Label Margin="10,0,10,0" Text="The schedule of ResilIT 2019. Click on a talk to get more information and to add it to your favorites!"/>
+        <Label Margin="10,0,10,0" Text="Once enrollment for talks is possible, you can enroll for all your favorite talks with only one click!"/>
+        <Button x:Name="favoriteEnroll" Text="Enroll for all favorites" IsVisible="{Binding CanEnroll}" Command="{Binding EnrollFavorites}"/>
         <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
             <Label StyleClass="switch" Text="Vertical schedule view" HorizontalOptions="Start" VerticalOptions="Center"/>
             <button:SfSwitch x:Name="SwitchView" MinimumHeightRequest="10" HorizontalOptions="FillAndExpand" IsOn="{Binding ScheduleSwitchChecked}"/>
         </StackLayout>
         <!--Content-->
-        <schedule:SfSchedule VerticalOptions="FillAndExpand"
+        <schedule:SfSchedule
+                             MinimumHeightRequest="30"
+                             VerticalOptions="FillAndExpand"
                              ScheduleView ="{Binding ScheduleType}"
                              TimeInterval="15"
                              TimeIntervalHeight="180"
@@ -74,5 +79,6 @@
             </schedule:SfSchedule.TimelineViewSettings>
         </schedule:SfSchedule>
     </StackLayout>
+        </ScrollView>
 
 </ContentView>
