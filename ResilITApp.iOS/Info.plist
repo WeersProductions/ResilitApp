@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>ResilITApp</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Syncfusion.ResilITApp</string>
+	<string>com.SNIC.ResilITApp</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>

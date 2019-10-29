@@ -65,6 +65,7 @@ namespace ResilITApp
             if (Device.RuntimePlatform == Device.iOS && Device.Idiom == TargetIdiom.Tablet)
             {
                 //headingGrid.Padding = new Thickness(10, 10, 0, 10);
+                hamburgerButton.FontFamily = "navigation.ttf#navigation";
             }
             if (Device.RuntimePlatform == Device.Android)
             {

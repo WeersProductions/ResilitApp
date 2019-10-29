@@ -81,7 +81,7 @@ namespace ResilITApp
             }
         }
 
-        private Color[] ScheduleColors = { Color.Blue, Color.LightBlue, Color.Coral };
+        private Color[] ScheduleColors = { Color.FromRgb(227, 103, 96), Color.LightBlue, Color.FromRgb(122, 218, 133) };
 
         public event PropertyChangedEventHandler PropertyChanged;
 

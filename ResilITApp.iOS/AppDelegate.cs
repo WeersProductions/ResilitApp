@@ -40,6 +40,7 @@ using Syncfusion.XForms.iOS.Buttons;
 using Syncfusion.XForms.iOS.Accordion;
 using FFImageLoading.Forms.Platform;
 using System.Net;
+using Syncfusion.ListView.XForms.iOS;
 
 namespace ResilITApp.iOS
 {
@@ -58,8 +59,6 @@ namespace ResilITApp.iOS
         //
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
-            ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
-
             Rg.Plugins.Popup.Popup.Init();
 
             global::Xamarin.Forms.Forms.Init();
@@ -117,10 +116,11 @@ namespace ResilITApp.iOS
 			
 			SfButtonRenderer.Init();
 			
-			
 			SfAccordionRenderer.Init();
 
             CachedImageRenderer.Init();
+
+            SfListViewRenderer.Init();
 
             LoadApplication(new App());
 

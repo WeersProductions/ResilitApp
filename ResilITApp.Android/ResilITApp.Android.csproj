@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,6 +39,13 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidLinkTool>r8</AndroidLinkTool>
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>/Users/fw/OneDrive/Informatica/Commitees/SNiC/App/Publishes/Android/AppBundle/resilit.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>q1p0w2o9</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>keystore.alias</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>q1p0w2o9</AndroidSigningKeyPass>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ResilITApp\ResilITApp.csproj">
