@@ -11,5 +11,6 @@ namespace ResilITApp
         public DateTime To { get; set; }
         public Color Color { get; set; }
         public string SubTitle { get; set; }
+        public string Description { get; set; }
     }
 }

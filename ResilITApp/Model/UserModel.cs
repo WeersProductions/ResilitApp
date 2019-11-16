@@ -17,5 +17,12 @@ namespace ResilITApp.Model
         public string phonenumber { get; set; }
         public string linkedin { get; set; }
         public int[] favorites { get; set; }
+
+        public bool Partner {
+            get
+            {
+                return type == "partner";
+            }
+        }
     }
 }

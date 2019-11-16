@@ -11,7 +11,7 @@ using System.Net;
 
 namespace ResilITApp.Android
 {
-    [Activity(Label = "ResilITApp", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "ResilIT", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -27,6 +27,7 @@ namespace ResilITApp.Android
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CachedImageRenderer.Init(true);
+            global::ZXing.Net.Mobile.Forms.Android.Platform.Init();
             LoadApplication(new App());
         }
 
@@ -45,6 +46,7 @@ namespace ResilITApp.Android
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            global::ZXing.Net.Mobile.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

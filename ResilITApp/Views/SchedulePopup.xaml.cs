@@ -18,7 +18,7 @@ namespace ResilITApp
             Appointment = appointment as Talk;
             InitializeComponent();
             EventName.Text = Appointment.EventName;
-            EventDescription.Text = Appointment.SubTitle;
+            EventDescription.Text = Appointment.Description;
             EventTime.Text = Appointment.From.ToShortTimeString() + " - " + Appointment.To.ToShortTimeString();
             _ = SetChecked();
             iconButton.Clicked += OnFavorite;

@@ -12,13 +12,20 @@ using Xamarin.Forms;
 
 namespace ResilITApp
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, IUserObserver
     {
         private static MainPage instance;
         public static MainPage Instance { get { return instance; } }
 
+        private List<string> list
+        {
+            get;
+            set;
+        }
+
         public MainPage()
         {
+            Login.Instance.AddUserObserver(this);
             instance = this;
             InitializeComponent();
 
@@ -34,7 +41,7 @@ namespace ResilITApp
 
         private void InitializeMenuItems()
         {
-            List<string> list = new List<string>();
+            list = new List<string>();
 
             if(!Login.Instance.IsLoggedIn)
             {
@@ -49,6 +56,16 @@ namespace ResilITApp
             }
             list.Add("Speakers");
             list.Add("Partners");
+            if(Login.Instance.IsLoggedIn)
+            {
+                if(Login.Instance.User != null)
+                {
+                    if(Login.Instance.User.Partner)
+                    {
+                        list.Add("Scan QR");
+                    }
+                }
+            }
 
             listView.ItemsSource = list;
         }
@@ -144,6 +161,10 @@ namespace ResilITApp
                 ScheduleViewModel.ShowFavoritesOnly = true;
                 appContent.Content = Activator.CreateInstance<TimeTable>();
             }
+            else if(e.SelectedItem.ToString() == "Scan QR")
+            {
+                appContent.Content = Activator.CreateInstance<ScanQRPage>();
+            }
             else
             {
                 ScheduleViewModel.ShowFavoritesOnly = false;
@@ -163,6 +184,27 @@ namespace ResilITApp
             {
                 headerLabel.WidthRequest = width - 100;
             }
+        }
+
+        public void OnUserReceived(UserModel user)
+        {
+            if (list == null)
+            {
+                return;
+            }
+            if(user.Partner && !list.Contains("Scan QR"))
+            {
+                list.Add("Scan QR");
+            }
+        }
+
+        public void OnUserLost()
+        {
+            if(list == null)
+            {
+                return;
+            }
+            list.Remove("Scan QR");
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ResilITApp.Views.ScanQRPage"
+    xmlns:resilitapp="clr-namespace:ResilITApp.Model"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:forms="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    x:Name="mainView">
+    <ContentView.BindingContext>
+        <resilitapp:ScanQRPageViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <StackLayout>
+            <Label>Start scanning students here.</Label>
+            <Label IsVisible="{Binding HasError}" TextColor="Red" Text="{Binding ErrorMessage, StringFormat='Error: {0}'}"></Label>
+            <Label IsVisible="{Binding ScanSuccess}" Text="{Binding ScannedName, StringFormat='Last scanned student: {0}'}"></Label>
+            <inputLayout:SfTextInputLayout
+                IsVisible="{Binding ScanSuccess}"
+                Hint="Comment"
+                ContainerType="Outlined">
+                <Entry x:Name="Comment" Text="{Binding Comment}" Keyboard="Default" ReturnType="Done"/>
+            </inputLayout:SfTextInputLayout>
+            <Button IsVisible="{Binding ScanSuccess}" Text="Submit comment" Command="{Binding SubmitCommentCommand}"/>
+            <Button Text="Scan another" IsVisible="{Binding DoNotScan}" Command="{Binding ScanQRCommand}"/>
+            <!--IsScanning="{Binding DoScan}" IsVisible="{Binding DoScan}"--><!--IsEnabled="{Binding DoScan}"-->
+            <forms:ZXingScannerView IsScanning="True" IsAnalyzing="{Binding DoScan}" IsVisible="True" ScanResultCommand="{Binding CheckScanResult}" x:Name="scannerView"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

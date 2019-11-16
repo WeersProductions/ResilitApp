@@ -32,11 +32,15 @@
         Orientation="Vertical">
         <StackLayout
             Orientation="Horizontal"
-            HorizontalOptions="FillAndExpand">
-            <Label x:Name="EventName"
-                   StyleClass="title"
-                   Text="Title"
-                   VerticalTextAlignment="Center" />
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="StartAndExpand">
+            <ScrollView>
+                <Label x:Name="EventName"
+                       StyleClass="title"
+                       Text="Title"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="FillAndExpand"/>
+            </ScrollView>
             <Image Source="{local:ImageResource ResilITApp.resources.logo.png}"
                    WidthRequest="50"
                    HeightRequest="50"
@@ -45,9 +49,11 @@
         <BoxView Color="gray"
                  WidthRequest="20"
                  HeightRequest="1" />
-        <Label x:Name="EventDescription"
-               Text="Description"
-               StyleClass="description" />
+        <ScrollView>
+            <Label x:Name="EventDescription"
+                   Text="Description"
+                   StyleClass="description" />
+        </ScrollView>
 
         <FlexLayout
             VerticalOptions="End"

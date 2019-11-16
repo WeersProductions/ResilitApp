@@ -194,6 +194,7 @@ namespace ResilITApp
             if(!request.IsSuccessStatusCode)
             {
                 //TODO: try again?
+                IsLoggedIn = false;
                 return false;
             }
 
@@ -215,6 +216,10 @@ namespace ResilITApp
             if(!_observers.Contains(observer))
             {
                 _observers.Add(observer);
+            }
+            if(IsLoggedIn && User != null)
+            {
+                observer.OnUserReceived(User);
             }
         }
 

@@ -13,5 +13,6 @@ namespace ResilITApp
         public bool enabled { get; set; }
         public string location { get; set; }
         public Color color {get; set; }
+        public string[] description { get; set; }
     }
 }

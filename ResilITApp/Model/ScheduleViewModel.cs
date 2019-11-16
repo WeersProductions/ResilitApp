@@ -81,7 +81,7 @@ namespace ResilITApp
             }
         }
 
-        private Color[] ScheduleColors = { Color.FromRgb(227, 103, 96), Color.LightBlue, Color.FromRgb(122, 218, 133) };
+        private Color[] ScheduleColors = { Color.FromRgb(227, 103, 96), Color.LightBlue, Color.FromRgb(122, 218, 133), Color.Indigo };
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -244,6 +244,10 @@ namespace ResilITApp
                 }
                 DateTime from = Convert.ToDateTime(data.startTime).ToUniversalTime();
                 DateTime to = Convert.ToDateTime(data.endTime).ToUniversalTime();
+                if(data.description == null || data.description.Length <= 0)
+                {
+                    data.description = new []{ "TBA"};
+                }
                 result.Add(new Talk()
                 {
                     Id = data.id,
@@ -251,7 +255,8 @@ namespace ResilITApp
                     From = new DateTime(2019, 11, 26, from.Hour, from.Minute, from.Second),
                     To = new DateTime(2019, 11, 26, to.Hour, to.Minute, to.Second),
                     Color = data.color,
-                    SubTitle = data.subTitle
+                    SubTitle = data.subTitle,
+                    Description = String.Join(Environment.NewLine, data.description)
                 });
             }
 

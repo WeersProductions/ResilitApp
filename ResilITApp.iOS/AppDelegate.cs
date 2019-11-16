@@ -122,6 +122,8 @@ namespace ResilITApp.iOS
 
             SfListViewRenderer.Init();
 
+            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(uiApplication, launchOptions);

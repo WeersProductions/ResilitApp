@@ -12,7 +12,6 @@ namespace ResilITApp.Model
         public string image { get; set; }
         public string subject { get; set; }
         public string company { get; set; }
-        public List<string> talk { get; set; }
         private List<string> _bio;
         public List<string> bio
         {

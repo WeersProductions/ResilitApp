@@ -35,6 +35,9 @@
 <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
 <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
 <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
+<PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="17.3.0.19" />
+<PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
+<PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
 </ItemGroup>
 
 <ItemGroup>
