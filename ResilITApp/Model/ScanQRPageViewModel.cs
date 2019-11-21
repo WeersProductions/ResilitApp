@@ -153,7 +153,7 @@ namespace ResilITApp.Model
             string scanned_user = result.Text;
             lastScan = scanned_user;
             AppController.AddBusy(this);
-            HttpMessage response = await Login.Instance.DoPost($"api/badge-scanning/add/{scanned_user}");
+            HttpMessage response = await Login.Instance.DoPost($"api/badge-scanning/{scanned_user}");
             ScanSuccess = response.Success;
             if (response.Success)
             {

@@ -11,6 +11,8 @@ namespace ResilITApp.Views
         public ScanQRPage()
         {
             InitializeComponent();
+            //scannerView.Options.TryHarder = true;
+            scannerView.Options.TryInverted = true;
             //ScanQRPageViewModel binding = new ScanQRPageViewModel();
             //mainView.BindingContext = binding;
             //scannerView.OnScanResult += binding.DoScanResult;
