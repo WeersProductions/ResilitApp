@@ -16,6 +16,14 @@ Can scan students and add comments to them.
 ## Set-up
 Clone the repo, open it using Visual Studio. Make sure all NuGet packages are properly downloaded as well. Be careful to not just update them, since they might have breaking changes.
 
+### config.json
+Add a config.json in the ResilITApp folder. It should contain the following:
+```
+{
+  "SyncFusionKey": [key]
+}
+```
+
 ## Requirements
 SyncFusion is used for the schedule components and various optimized lists. The waiting indicator is also controlled by SyncFusion.
 Since SNiC is non-profit, a legal key is free.
