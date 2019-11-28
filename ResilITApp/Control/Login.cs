@@ -275,7 +275,13 @@ namespace ResilITApp
 
         public async Task<HttpMessage> DoPost(string url)
         {
-            if(url.StartsWith("/", StringComparison.Ordinal))
+            return await DoPost(url, new StringContent(""));
+
+        }
+
+        public async Task<HttpMessage> DoPost(string url, HttpContent stringContent)
+        {
+            if (url.StartsWith("/", StringComparison.Ordinal))
             {
                 url = url.Substring(1);
             }
@@ -283,7 +289,7 @@ namespace ResilITApp
             HttpMessage result = new HttpMessage();
             try
             {
-                var request = await _client.PostAsync(url, new StringContent(""));
+                var request = await _client.PostAsync(url, stringContent);
 
                 result.Success = request.IsSuccessStatusCode;
                 if (request.RequestMessage.RequestUri.AbsolutePath == "/login" && !url.Equals("/login"))
@@ -299,7 +305,6 @@ namespace ResilITApp
                 result.Message = e.Message;
             }
             return result;
-
         }
     }
 }

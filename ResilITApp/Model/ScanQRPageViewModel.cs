@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Newtonsoft.Json;
@@ -22,6 +24,20 @@ namespace ResilITApp.Model
             set
             {
                 scannedName = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string scannedId;
+        public string ScannedId
+        {
+            get
+            {
+                return scannedId;
+            }
+            set
+            {
+                scannedId = value;
                 NotifyPropertyChanged();
             }
         }
@@ -144,7 +160,37 @@ namespace ResilITApp.Model
                 await Application.Current.MainPage.DisplayAlert("Failed", "Last scan was not successfull. Try to scan the badge again.", "OK");
             }
 
+            AppController.AddBusy(this);
+
             // Update the comment.
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("comment", Comment)
+            });
+            HttpMessage response = await Login.Instance.DoPost($"api/badge-scanning/edit/{ScannedId}", formContent);
+            ScanSuccess = response.Success;
+            if(response.Success)
+            {
+                string json = await response.Response.Content.ReadAsStringAsync();
+                JSONQRComment commentResult = JsonConvert.DeserializeObject<JSONQRComment>(json);
+                ScanSuccess = commentResult.success;
+                if(!commentResult.success)
+                {
+                    ErrorMessage = commentResult.message;
+                } else
+                {
+                    ErrorMessage = "";
+                    ScanSuccess = false;
+                }
+            } else
+            {
+                if(string.IsNullOrEmpty(response.Message))
+                {
+                    response.Message = "Could not save comment.";
+                }
+                ErrorMessage = response.Message;
+            }
+            AppController.RemoveBusy(this);
         }
 
         private async void DoScanResult(ZXing.Result result)
@@ -167,6 +213,7 @@ namespace ResilITApp.Model
                 else
                 {
                     ScannedName = scanResult.user_name;
+                    scannedId = scanResult.id;
                 }
             }
             else
